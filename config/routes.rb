@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :read_lists
   resources :books
   resources :users
 

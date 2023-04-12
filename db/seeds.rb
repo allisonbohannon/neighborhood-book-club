@@ -18,11 +18,20 @@
 #     )
 # end
 
-10.times do 
-    Book.create(
-        author: Faker::Book.author,
-        title: Faker::Book.title, 
-        subject: Faker::Book.genre
+# 10.times do 
+#     Book.create(
+#         author: Faker::Book.author,
+#         title: Faker::Book.title, 
+#         subject: Faker::Book.genre
+#     )
+# end
+
+50.times do 
+    ReadList.create(
+        user_id: rand(1..10),
+        book_id: rand(1..10),
+        rating: rand(1..5),
+        read_status: "Want to read"
     )
 end
 

@@ -27,11 +27,11 @@
 # end
 
 50.times do 
-    ReadList.create(
+    ReadingList.create(
+        rating: rand(1..5),
+        read_status: "Want to read",
         user_id: rand(1..10),
         book_id: rand(1..10),
-        rating: rand(1..5),
-        read_status: "Want to read"
     )
 end
 

@@ -1,6 +1,6 @@
-class CreateReadLists < ActiveRecord::Migration[6.1]
+class CreateReadingLists < ActiveRecord::Migration[6.1]
   def change
-    create_table :read_lists do |t|
+    create_table :reading_lists do |t|
       t.belongs_to :user, null: false, foreign_key: true
       t.belongs_to :book, null: false, foreign_key: true
       t.integer :rating

@@ -12,9 +12,9 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/read_lists", type: :request do
+RSpec.describe "/reading_lists", type: :request do
   # This should return the minimal set of attributes required to create a valid
-  # ReadList. As you add validations to ReadList, be sure to
+  # ReadingList. As you add validations to ReadingList, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -26,7 +26,7 @@ RSpec.describe "/read_lists", type: :request do
 
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
-  # ReadListsController, or in your router and rack
+  # ReadingListsController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
     {}
@@ -34,48 +34,48 @@ RSpec.describe "/read_lists", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      ReadList.create! valid_attributes
-      get read_lists_url, headers: valid_headers, as: :json
+      ReadingList.create! valid_attributes
+      get reading_lists_url, headers: valid_headers, as: :json
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      read_list = ReadList.create! valid_attributes
-      get read_list_url(read_list), as: :json
+      reading_list = ReadingList.create! valid_attributes
+      get reading_list_url(reading_list), as: :json
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new ReadList" do
+      it "creates a new ReadingList" do
         expect {
-          post read_lists_url,
-               params: { read_list: valid_attributes }, headers: valid_headers, as: :json
-        }.to change(ReadList, :count).by(1)
+          post reading_lists_url,
+               params: { reading_list: valid_attributes }, headers: valid_headers, as: :json
+        }.to change(ReadingList, :count).by(1)
       end
 
-      it "renders a JSON response with the new read_list" do
-        post read_lists_url,
-             params: { read_list: valid_attributes }, headers: valid_headers, as: :json
+      it "renders a JSON response with the new reading_list" do
+        post reading_lists_url,
+             params: { reading_list: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new ReadList" do
+      it "does not create a new ReadingList" do
         expect {
-          post read_lists_url,
-               params: { read_list: invalid_attributes }, as: :json
-        }.to change(ReadList, :count).by(0)
+          post reading_lists_url,
+               params: { reading_list: invalid_attributes }, as: :json
+        }.to change(ReadingList, :count).by(0)
       end
 
-      it "renders a JSON response with errors for the new read_list" do
-        post read_lists_url,
-             params: { read_list: invalid_attributes }, headers: valid_headers, as: :json
+      it "renders a JSON response with errors for the new reading_list" do
+        post reading_lists_url,
+             params: { reading_list: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
       end
@@ -88,28 +88,28 @@ RSpec.describe "/read_lists", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested read_list" do
-        read_list = ReadList.create! valid_attributes
-        patch read_list_url(read_list),
-              params: { read_list: new_attributes }, headers: valid_headers, as: :json
-        read_list.reload
+      it "updates the requested reading_list" do
+        reading_list = ReadingList.create! valid_attributes
+        patch reading_list_url(reading_list),
+              params: { reading_list: new_attributes }, headers: valid_headers, as: :json
+        reading_list.reload
         skip("Add assertions for updated state")
       end
 
-      it "renders a JSON response with the read_list" do
-        read_list = ReadList.create! valid_attributes
-        patch read_list_url(read_list),
-              params: { read_list: new_attributes }, headers: valid_headers, as: :json
+      it "renders a JSON response with the reading_list" do
+        reading_list = ReadingList.create! valid_attributes
+        patch reading_list_url(reading_list),
+              params: { reading_list: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including("application/json"))
       end
     end
 
     context "with invalid parameters" do
-      it "renders a JSON response with errors for the read_list" do
-        read_list = ReadList.create! valid_attributes
-        patch read_list_url(read_list),
-              params: { read_list: invalid_attributes }, headers: valid_headers, as: :json
+      it "renders a JSON response with errors for the reading_list" do
+        reading_list = ReadingList.create! valid_attributes
+        patch reading_list_url(reading_list),
+              params: { reading_list: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
       end
@@ -117,11 +117,11 @@ RSpec.describe "/read_lists", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested read_list" do
-      read_list = ReadList.create! valid_attributes
+    it "destroys the requested reading_list" do
+      reading_list = ReadingList.create! valid_attributes
       expect {
-        delete read_list_url(read_list), headers: valid_headers, as: :json
-      }.to change(ReadList, :count).by(-1)
+        delete reading_list_url(reading_list), headers: valid_headers, as: :json
+      }.to change(ReadingList, :count).by(-1)
     end
   end
 end

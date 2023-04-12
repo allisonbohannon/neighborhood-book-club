@@ -7,14 +7,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+# 10.times do 
+#    User.create(
+#         username: Faker::Superhero.unique.name,
+#         password_digest: BCrypt::Password.create('password'),
+#         first_name: Faker::Name.unique.first_name, 
+#         last_name: Faker::Name.unique.last_name,
+#         bio: Faker::Quote.jack_handey,
+#         zipcode: Faker::Address.zip,
+#     )
+# end
+
 10.times do 
-   User.create(
-        username: Faker::Superhero.unique.name,
-        password_digest: BCrypt::Password.create('password'),
-        first_name: Faker::Name.unique.first_name, 
-        last_name: Faker::Name.unique.last_name,
-        bio: Faker::Quote.jack_handey,
-        zipcode: Faker::Address.zip,
+    Book.create(
+        author: Faker::Book.author,
+        title: Faker::Book.title, 
+        subject: Faker::Book.genre
     )
 end
 

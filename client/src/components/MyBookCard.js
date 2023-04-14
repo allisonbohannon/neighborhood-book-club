@@ -2,8 +2,9 @@ import React, {useContext, useState} from 'react'
 import { Button, Card, Box, CardActionArea } from '@mui/material'
 import { CardHeader, CardHeading, CardBody } from '../styles'
 import { UserContext } from '../context/User'
+import StarRatingEdit from './StarRatingEdit'
 
-const MyBookCard = ({item, onUpdateUser}) => {
+const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
 
     const { currentUser } = useContext(UserContext)
 
@@ -30,7 +31,6 @@ const MyBookCard = ({item, onUpdateUser}) => {
         onUpdateUser(currentUser.id)
         };
         
-
     const handleRemoveFromList = () => {
         fetch(`/reading_lists/${item.id}`, {
             method: "DELETE",
@@ -42,6 +42,19 @@ const MyBookCard = ({item, onUpdateUser}) => {
             .then(r => r.json())
             .then(data => onUpdateUser(data))
         };
+
+    const onRatingChange = (newRating) => {
+        fetch(`/reading_lists/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({rating: newRating}),
+            }).then(r => r.json())
+            .then(data => console.log(data))
+
+        onUpdateBook(book.id)
+    } 
 
   return (
         <Card variant='outlined' style={{display:"inline-flex", margin:"3px"}}>
@@ -56,7 +69,7 @@ const MyBookCard = ({item, onUpdateUser}) => {
                     <p>Written By: {author}</p>
                     <p>Published {published_date}</p>
                     <p>Genres: {subject}</p>
-                    <p>My rating: {rating}</p>
+                    <p>My rating: <StarRatingEdit userRating={rating} onRatingChange={onRatingChange} /></p>
                 </Box>
                 <Box textAlign="center">
                     <Button 

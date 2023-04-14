@@ -2,28 +2,28 @@ import { useState } from "react";
 import Star from "../styles/Star";
 
 
-function StarRatingEdit({ onChange, userRating }) {
-
+function StarRatingEdit({ onRatingChange, userRating }) {
 
   const [rating, setRating] = useState(userRating);
 
-
-  const changeRating = (newRating) => {
-
+  const handleRatingChange = (newRating) => {
     setRating(newRating);
-    onChange?.(newRating);
+    onRatingChange(newRating);
   };
 
   return (
+  
     <span>
-      {[1, 2, 3, 4, 5].map((value) => (
-        <Star
-          key={value}
-          filled={value <= rating}
-          onClick={() => changeRating(value)}
-        />
-      ))}
+        {[1, 2, 3, 4, 5].map((value) => (
+          <Star
+            key={value}
+            filled={value <= rating}
+            onClick={() => handleRatingChange(value)}
+          />
+        ))}
     </span>
+  
+    
   );
 }
 export default StarRatingEdit;

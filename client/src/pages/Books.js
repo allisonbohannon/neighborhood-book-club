@@ -35,9 +35,9 @@ const Books = ({onAddBook}) => {
         displayResults = "Hmm... no matches found"
     } else {
         displayResults = searchResults.filter(result => result.isbn )
-        .map(result => {
-            return <li key={result.key} style={{listStyle:'none'}}><ResultCard result={result} onAddBook={onAddBook}/></li>
-        })
+            .map(result => {
+                return <li key={result.key} style={{listStyle:'none'}}><ResultCard result={result} onAddBook={onAddBook}/></li>
+            })
     }
 
   return (

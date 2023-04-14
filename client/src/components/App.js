@@ -8,6 +8,7 @@ import BookPage from "../pages/BookPage";
 import EditCommentForm from "../pages/EditCommentForm";
 import ShowCommentForm from "../pages/ShowCommentForm";
 import AddCommentForm from "../pages/AddCommentForm";
+import MyBooks from "../pages/MyBooks";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import { UserContext } from "../context/User";
@@ -50,6 +51,17 @@ function App() {
       setBooks([...books, newBook])
     }
 
+  const onUpdateBook = (bookId) => {
+      fetch(`/users/${bookId}`)
+      .then(r => r.json())
+      .then(data => {
+        setBooks((books)=> 
+          books.map((book)=> {
+            return book.id === bookId ? data : book
+        })
+      )}
+    )};
+
   const onAddBookClub = (newBookClub) => {
     const updatedBooks = books.map(book => {
       if (book.id = newBookClub.book_id) {
@@ -61,6 +73,17 @@ function App() {
 
     setBooks(updatedBooks)
   }
+
+  const onUpdateUser = (userId) => {
+    fetch(`/users/${userId}`)
+    .then(r => r.json())
+    .then(data => {
+      setUsers((users)=> 
+        users.map((user)=> {
+          return user.id === userId ? data : user
+      })
+    )}
+  )};
 
   const onEditComment = (updatedComment) => {
     // setComments((comments)=> 
@@ -124,6 +147,7 @@ function App() {
                 <Route path="/books/:bookId" element={<BookPage
                   books={books}
                   users={users}
+                  onUpdateUser={onUpdateUser}
                   onAddBookClub={onAddBookClub}
                   onChangeRating={onChangeRating}
                   onAddRating={onAddRating}
@@ -143,6 +167,15 @@ function App() {
                    users={users}
                    onEditComment={onEditComment}
                    onDeleteComment={onDeleteComment}
+                />}/>
+
+                <Route path="/mybooks" element={<MyBooks
+                    books={books}
+                    users={users}
+                    onUpdateUser={onUpdateUser}
+                    onUpdateBook={onUpdateBook}
+                    onChangeRating={onChangeRating}
+                    onAddRating={onAddRating}
                 />}/>
                 <Route path="/users" element={<Users
                   users={users}

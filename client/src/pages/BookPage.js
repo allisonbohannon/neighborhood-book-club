@@ -76,18 +76,18 @@ const BookPage = ({books, users, onChangeRating, onAddRating, onAddBookClub}) =>
    }
 
   const handleMarkRead = () => {
-    if (readStatus === "none" || readStatus === "want") {
-      setReadStatus("read")
+    if (readStatus == null || readStatus === "Want to read") {
+      setReadStatus("Have read")
     } else {
-      setReadStatus("none")
+      setReadStatus(null)
     }
   }
 
   const handleMarkWant = () => {
-    if (readStatus === "none" || readStatus === "read") {
-      setReadStatus("want")
+    if (readStatus == null || readStatus === "Have read") {
+      setReadStatus("Want to read")
     } else {
-      setReadStatus("none")
+      setReadStatus(null)
     }
   }
 
@@ -145,13 +145,13 @@ const BookPage = ({books, users, onChangeRating, onAddRating, onAddBookClub}) =>
             <Box textAlign="center">
               <Button 
                   onClick={handleMarkRead}
-                  variant={readStatus === "read" ? "outlined" : "contained"}
+                  variant={readStatus === "Have read" ? "outlined" : "contained"}
                   style={{margin:"1em"}}>
                     I've Read This!
                 </Button>
               <Button 
                   onClick={handleMarkWant}
-                  variant={readStatus === "want" ? "outlined" : "contained"}
+                  variant={readStatus === "Want to read" ? "outlined" : "contained"}
                   style={{margin:"1em"}}>
                     I Want to Read This!
                 </Button>

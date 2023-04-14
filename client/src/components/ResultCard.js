@@ -4,7 +4,6 @@ import { CardBody, CardHeader, CardHeading } from '../styles'
 import {Card, CardActionArea} from '@mui/material'
 
 const ResultCard = ({result, onAddBook}) => {
-
     const navigate = useNavigate()
 
     const handleClick = () => {

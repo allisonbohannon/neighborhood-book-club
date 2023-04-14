@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   
-  resources :reading_lists
+
+  resources :book_clubs
+  resources :users 
   resources :books
-  resources :users
+  resources :reading_lists
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

@@ -15,13 +15,13 @@ class BooksController < ApplicationController
 
   # POST /books
   def create
-    @book = Book.new(book_params)
-
-    if @book.save
-      render json: @book, status: :created, location: @book
+    if Book.exists?(isbn: params[:isbn])
+      book = Book.find_by(isbn: params[:isbn])
+      render json: book
     else
-      render json: @book.errors, status: :unprocessable_entity
-    end
+      book = Book.create(book_params)
+      render json: book, include: :book_clubs, status: :created
+    end 
   end
 
   # PATCH/PUT /books/1

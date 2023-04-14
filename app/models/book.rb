@@ -3,6 +3,8 @@ class Book < ApplicationRecord
     has_many :reading_lists
     has_many :users, through: :reading_lists
 
+    has_many :book_clubs
+
     def total_ratings 
         self.reading_lists.count {|item| !item.rating.nil? }
     end

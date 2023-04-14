@@ -26,12 +26,20 @@
 #     )
 # end
 
+# 50.times do 
+#     ReadingList.create(
+#         rating: rand(1..5),
+#         read_status: "Want to read",
+#         user_id: rand(1..10),
+#         book_id: rand(1..10),
+#     )
+# end
+
 50.times do 
-    ReadingList.create(
-        rating: rand(1..5),
-        read_status: "Want to read",
-        user_id: rand(1..10),
+    BookClub.create(
         book_id: rand(1..10),
+        zip_three: rand(1..999),
+        status: "Active"
     )
 end
 

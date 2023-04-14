@@ -102,26 +102,6 @@ function App() {
   const onAddUser = (userObject) => {
     setUsers([...users, userObject])
   }
-
-  const onChangeRating = (updatedVisit) => {
-  //   setVisits((visits) => 
-  //     visits.map((visit) => {
-  //       return visit.id === updatedVisit.id ? updatedVisit : visit;
-  //     })
-  // )
-} 
-
-  const onAddRating = (newVisit) => {
-    // setVisits([...visits, newVisit])
-  }
-
-  // const onUpdateWinery = (updatedWinery) => {
-  //   setWineries((wineries) => 
-  //     wineries.map((winery) => {
-  //       return winery.id === updatedWinery.id ? updatedWinery : winery; 
-  //     })
-  // )}
-
   //ensure user login prior to showing page
 
   if (!currentUser) return (
@@ -149,13 +129,10 @@ function App() {
                   users={users}
                   onUpdateUser={onUpdateUser}
                   onAddBookClub={onAddBookClub}
-                  onChangeRating={onChangeRating}
-                  onAddRating={onAddRating}
                 />}/>
                  <Route path="/books/:bookId/bookclubs/:book_club_id" element={<EditCommentForm
                   books={books}
                   users={users}
-                 
                 />}/>
                  <Route path="/bookclub/:bookclubId/messages/new" element={<AddCommentForm
                    books={books}
@@ -174,12 +151,7 @@ function App() {
                     users={users}
                     onUpdateUser={onUpdateUser}
                     onUpdateBook={onUpdateBook}
-                    onChangeRating={onChangeRating}
-                    onAddRating={onAddRating}
                 />}/>
-                <Route path="/users" element={<Users
-                  users={users}
-                />} />
                 <Route path="/users/:id" element={<Users
                    users={users}
                 />} />

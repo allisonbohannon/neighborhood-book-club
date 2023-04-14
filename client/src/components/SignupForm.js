@@ -10,6 +10,8 @@ function SignUpForm({onAddUser}) {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [zip, setZip] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +28,8 @@ function SignUpForm({onAddUser}) {
       },
       body: JSON.stringify({
         username,
+        email,
+        zip,
         password,
         password_confirmation: passwordConfirmation,
       }),
@@ -57,6 +61,26 @@ function SignUpForm({onAddUser}) {
           />
         </FormField>
         <FormField>
+          <Label htmlFor="email">e-mail address</Label>
+          <Input
+            type="text"
+            id="email"
+            autoComplete="off"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </FormField>
+        <FormField>
+          <Label htmlFor="zip">Zipcode</Label>
+          <Input
+            type="text"
+            id="zip"
+            autoComplete="off"
+            value={zip}
+            onChange={(e) => setZip(e.target.value)}
+          />
+        </FormField>
+        <FormField>
           <Label htmlFor="password">Password</Label>
           <Input
             type="password"
@@ -76,6 +100,7 @@ function SignUpForm({onAddUser}) {
             autoComplete="current-password"
           />
         </FormField>
+        
         <FormField>
           <CardButton type="submit">{isLoading ? "Loading..." : "Sign Up"}</CardButton>
         </FormField>

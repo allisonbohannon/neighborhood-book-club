@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_15_001424) do
+ActiveRecord::Schema.define(version: 2023_04_15_023110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2023_04_15_001424) do
 
   create_table "book_clubs", force: :cascade do |t|
     t.bigint "book_id", null: false
-    t.integer "zip_three"
+    t.string "zip_three"
     t.string "admin"
     t.string "status"
     t.integer "total_members"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2023_04_15_001424) do
     t.string "email"
     t.string "password_digest"
     t.string "bio"
-    t.integer "zipcode"
+    t.string "zipcode"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

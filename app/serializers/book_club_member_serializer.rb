@@ -1,5 +1,5 @@
 class BookClubMemberSerializer < ActiveModel::Serializer
   attributes :id, :status
-  has_one :user
-  has_one :book_club
+  belongs_to :user
+  belongs_to :book_club
 end

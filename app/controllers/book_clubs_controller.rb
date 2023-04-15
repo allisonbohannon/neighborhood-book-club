@@ -5,7 +5,7 @@ class BookClubsController < ApplicationController
   def index
     @book_clubs = BookClub.all
 
-    render json: @book_clubs
+    render json: @book_clubs, include: ['book_club_members', 'book_club_members.user']
   end
 
   # GET /book_clubs/1

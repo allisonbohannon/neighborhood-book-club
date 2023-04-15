@@ -43,12 +43,12 @@
 #     )
 # end
 
-100.times do 
-    BookClubMember.create(
-        book_club_id: rand(1..50),
-        user_id: rand(1..10),
-        status: "Active"
-    )
-end
+# 100.times do 
+#     BookClubMember.create(
+#         book_club_id: rand(1..50),
+#         user_id: rand(1..10),
+#         status: "Active"
+#     )
+# end
 
 puts "done seeding!"

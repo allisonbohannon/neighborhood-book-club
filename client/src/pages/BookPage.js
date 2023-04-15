@@ -111,7 +111,7 @@ const BookPage = ({books, onChangeRating, onAddRating, onAddBookClub}) => {
   }
 
   const displayAvgRating = () =>  <StarRatingShow rating={displayBook.avgerage_rating}/>
-  const displayUserRating = () => <div>Your Rating: <StarRatingEdit userRating={0} onChange={handleUpudateReadingList} /></div> 
+  const displayUserRating = () => <div>Your Rating: <StarRatingEdit userRating={0} onChange={handleUpdateReadingList} /></div> 
 
   return (
     <Container>

@@ -9,40 +9,39 @@ import { UserContext } from '../context/User';
 import { Box } from '@mui/system';
 
 
-const BookPage = ({books, users, onChangeRating, onAddRating, onAddBookClub}) => {
+const BookPage = ({books, onChangeRating, onAddRating, onAddBookClub}) => {
 
-  const { bookId } = useParams()
+  const { bookId } = useParams();
 
-  const {currentUser} = useContext(UserContext)
-  const navigate = useNavigate()
+  const {currentUser} = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const [readStatus, setReadStatus] = useState("none") 
+  const [readStatus, setReadStatus] = useState("none");
 
-  const displayBook = books.find(book => book.id === parseInt(bookId))
-  const userZip = 111
+  const displayBook = books.find(book => book.id === parseInt(bookId));
 
-  // const relatedComments = comments.filter(comment => comment.winery.id === displayWinery.id)
+  currentUser.reading_lists.forEach(item => {
+    if (item.book_id === displayBook.id) {
+      setReadStatus(item.read_status)
+    } 
+  });
 
-  // let displayComments; 
+  let userBook = null;
+  if (currentUser.reading_lists.length >= 1) {
+     userBook = currentUser.reading_lists.filter(item => item.book_id === displayBook.id)
+  }
 
-  // if (relatedComments.length >= 1) {
-  //   displayComments = relatedComments.map(comment => {
-  //     return (<li key={comment.id} style={{listStyle:"none"}}>
-  //         <CommentCard  comment={comment} users={users} wineries={wineries} /> 
-  //       </li>)
-  //   })     
-  // } else {
-  //   displayComments = <p>No one has left any comments yet!</p>
-  // }
+  let localBookClub = null; 
+  if (displayBook.book_clubs.length>=1) {
+    localBookClub = displayBook.book_clubs.filter(item => item.zip_three === currentUser.currentUser.zipcode.slice(0, 3))
+    console.log(localBookClub)
+  }
   
-
-  // const userVisit = visits.find(visit => visit.user.id === currentUser)
-
   const handleClick = () => {
     navigate(-1)
   }
 
-  // const handleAddRating = () => {
+  const handleAddReadingList = () => {
   //   const newVisitObj = {
   //       user_id: currentUser.id,
   //       winery_id: displayWinery.id,
@@ -56,9 +55,9 @@ const BookPage = ({books, users, onChangeRating, onAddRating, onAddBookClub}) =>
   //     body: JSON.stringify(newVisitObj),
   //   }).then(r => r.json())
   //   .then(data => onAddRating(data))
-  // }
+  }
 
-  const handleChangeRating = (newRating) => {
+  const handleUpdateReadingList = () => {
   //   fetch(`/visits/${userVisit.id}`, {
   //     method: "PATCH",
   //     headers: {
@@ -94,11 +93,10 @@ const BookPage = ({books, users, onChangeRating, onAddRating, onAddBookClub}) =>
   const handleAddBookClub = () => {
     const bookClubObj = {
       book_id: displayBook.id,
-      zip_three: userZip,
-      user_id: currentUser.id,
+      zip_three: currentUser.zipcode.slice(0, 3),
+      admin: currentUser.username,
       status: "Active"
     }
-    console.log(JSON.stringify(bookClubObj))
     fetch("/book_clubs", {
           method: "POST",
           headers: {
@@ -113,11 +111,7 @@ const BookPage = ({books, users, onChangeRating, onAddRating, onAddBookClub}) =>
   }
 
   const displayAvgRating = () =>  <StarRatingShow rating={displayBook.avgerage_rating}/>
-  const displayUserRating = () => <div>Your Rating: <StarRatingEdit userRating={0} onChange={handleChangeRating} /></div> 
-  
-  //const displayBookClub = displayBook.book_clubs
-    //.filter(club => club.zip_three === userZip) 
-
+  const displayUserRating = () => <div>Your Rating: <StarRatingEdit userRating={0} onChange={handleUpudateReadingList} /></div> 
 
   return (
     <Container>
@@ -144,13 +138,13 @@ const BookPage = ({books, users, onChangeRating, onAddRating, onAddBookClub}) =>
             {/* <CardButton ><Link to={`/books/${displayBook.id}/comments/new`} style={{color:'white', textDecoration:'none'}} >Add Comment</Link></CardButton> */}
             <Box textAlign="center">
               <Button 
-                  onClick={handleMarkRead}
+                  onClick={userBook? handleUpdateReadingList: handleAddReadingList}
                   variant={readStatus === "Have read" ? "outlined" : "contained"}
                   style={{margin:"1em"}}>
                     I've Read This!
                 </Button>
               <Button 
-                  onClick={handleMarkWant}
+                  onClick={userBook? handleUpdateReadingList: handleAddReadingList}
                   variant={readStatus === "Want to read" ? "outlined" : "contained"}
                   style={{margin:"1em"}}>
                     I Want to Read This!

@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Card, CardActionArea } from '@mui/material'
+import { CardActionArea } from '@mui/material'
+import { UserContext } from '../context/User';
+
 
 
 const BookClubCard = ({club}) => {
 
+    const {currentUser} = useContext(UserContext);
     const navigate = useNavigate(); 
     const handleClick = () => {navigate(`bookClubs/${club.id}`)}
 
@@ -13,6 +16,7 @@ const BookClubCard = ({club}) => {
         <p>Check out this club!</p>
         <p>Total Members: </p>
         <p>Active since: {club.created_at} </p>
+        <p>{club.admin === currentUser.username ? "ADMIN" : "" }</p>
     </CardActionArea>
   )
 }

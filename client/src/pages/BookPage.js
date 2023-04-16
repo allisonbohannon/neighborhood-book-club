@@ -16,6 +16,8 @@ const BookPage = ({books, onChangeRating, onAddRating, onAddBookClub}) => {
   const {currentUser} = useContext(UserContext);
   const navigate = useNavigate();
 
+  console.log(currentUser)
+
   const [readStatus, setReadStatus] = useState("none");
 
   const displayBook = books.find(book => book.id === parseInt(bookId));
@@ -131,11 +133,6 @@ const BookPage = ({books, onChangeRating, onAddRating, onAddBookClub}) => {
               </div> 
              
           </CardHeader>
-            {/* <CardBody style={{margin:"1em", padding:"3px"}}>
-            <p style={{fontSize:'1.1em', color:'rgb(150,78,108)' }}>Comments:</p>
-                {displayComments}
-            </CardBody> */}
-            {/* <CardButton ><Link to={`/books/${displayBook.id}/comments/new`} style={{color:'white', textDecoration:'none'}} >Add Comment</Link></CardButton> */}
             <Box textAlign="center">
               <Button 
                   onClick={userBook? handleUpdateReadingList: handleAddReadingList}

@@ -9,87 +9,60 @@ import { UserContext } from '../context/User';
 import { Box } from '@mui/system';
 
 
-const BookPage = ({books, onChangeRating, onAddRating, onAddBookClub}) => {
-
+const BookPage = ({books, onAddBookClub, onUpdateUser}) => {
   const { bookId } = useParams();
 
   const {currentUser} = useContext(UserContext);
   const navigate = useNavigate();
 
-  console.log(currentUser)
-
-  const [readStatus, setReadStatus] = useState("none");
-
   const displayBook = books.find(book => book.id === parseInt(bookId));
-
-  currentUser.reading_lists.forEach(item => {
-    if (item.book_id === displayBook.id) {
-      setReadStatus(item.read_status)
-    } 
-  });
 
   let userBook = null;
   if (currentUser.reading_lists.length >= 1) {
-     userBook = currentUser.reading_lists.filter(item => item.book_id === displayBook.id)
-  }
+     userBook = currentUser.reading_lists.find(item => item.book_id === displayBook.id)
+  };
+
+  const [readStatus, setReadStatus] = useState(userBook.read_status);
 
   let localBookClub = null; 
   if (displayBook.book_clubs.length>=1) {
-    localBookClub = displayBook.book_clubs.filter(item => item.zip_three === currentUser.currentUser.zipcode.slice(0, 3))
-    console.log(localBookClub)
+    localBookClub = displayBook.book_clubs.find(item => item.zip_three === currentUser.currentUser.zipcode.slice(0, 3))
   }
   
   const handleClick = () => {
     navigate(-1)
   }
 
-  const handleAddReadingList = () => {
-  //   const newVisitObj = {
-  //       user_id: currentUser.id,
-  //       winery_id: displayWinery.id,
-  //       rating: 0
-  //   }
-  //   fetch("/visits", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(newVisitObj),
-  //   }).then(r => r.json())
-  //   .then(data => onAddRating(data))
-  }
-
-  const handleUpdateReadingList = () => {
-  //   fetch(`/visits/${userVisit.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //         "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({rating: newRating}),
-  //     }).then(r => r.json())
-  //     .then(data => {
-  //         onChangeRating(data)
-  //         fetch(`/wineries/${displayWinery.id}`)
-  //         .then(r => r.json())
-  //         .then(data => onUpdateWinery(data))
-  //     })
-
-   }
-
-  const handleMarkRead = () => {
-    if (readStatus == null || readStatus === "Want to read") {
-      setReadStatus("Have read")
+  const handleUpdateReadingList = (e) => {
+    if ( userBook ) {
+      fetch(`/reading_lists/${userBook.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({read_status: e.target.value}),
+        }).then(r => r.json())
+        .then(data => {
+            setReadStatus(e.target.value)
+            onUpdateUser(currentUser.id)
+        })
     } else {
-      setReadStatus(null)
-    }
-  }
-
-  const handleMarkWant = () => {
-    if (readStatus == null || readStatus === "Have read") {
-      setReadStatus("Want to read")
-    } else {
-      setReadStatus(null)
-    }
+      fetch("/reading_lists", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: currentUser.id,
+          book_id: displayBook.id,
+          read_status: e.target.value
+        }),
+      }).then(r => r.json())
+      .then(data => {
+        setReadStatus(e.target.value)
+        onUpdateUser(currentUser.id)
+      })
+     }
   }
 
   const handleAddBookClub = () => {
@@ -98,7 +71,7 @@ const BookPage = ({books, onChangeRating, onAddRating, onAddBookClub}) => {
       zip_three: currentUser.zipcode.slice(0, 3),
       admin: currentUser.username,
       status: "Active"
-    }
+    };
     fetch("/book_clubs", {
           method: "POST",
           headers: {
@@ -109,8 +82,8 @@ const BookPage = ({books, onChangeRating, onAddRating, onAddBookClub}) => {
         .then(data => { 
           onAddBookClub(data)
           navigate(`/bookclubs/${data.id}`)
-        })   
-  }
+        });
+  };
 
   const displayAvgRating = () =>  <StarRatingShow rating={displayBook.avgerage_rating}/>
   const displayUserRating = () => <div>Your Rating: <StarRatingEdit userRating={0} onChange={handleUpdateReadingList} /></div> 
@@ -135,13 +108,15 @@ const BookPage = ({books, onChangeRating, onAddRating, onAddBookClub}) => {
           </CardHeader>
             <Box textAlign="center">
               <Button 
-                  onClick={userBook? handleUpdateReadingList: handleAddReadingList}
+                  value="Have read"
+                  onClick={handleUpdateReadingList}
                   variant={readStatus === "Have read" ? "outlined" : "contained"}
                   style={{margin:"1em"}}>
                     I've Read This!
                 </Button>
               <Button 
-                  onClick={userBook? handleUpdateReadingList: handleAddReadingList}
+                  value="Want to read"
+                  onClick={handleUpdateReadingList}
                   variant={readStatus === "Want to read" ? "outlined" : "contained"}
                   style={{margin:"1em"}}>
                     I Want to Read This!

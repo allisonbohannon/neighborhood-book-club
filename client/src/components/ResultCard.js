@@ -16,8 +16,6 @@ const ResultCard = ({result, onAddBook}) => {
             cover_url: url,
             isbn: isbn
         }
-
-        console.log(JSON.stringify(bookObj))
         //On the backend, user find_or_create_by isbn to add to DB
         fetch("/books", {
             method: "POST",
@@ -27,8 +25,6 @@ const ResultCard = ({result, onAddBook}) => {
             body: JSON.stringify(bookObj),
             }).then(r => {
                 if (!r.ok) {
-                    console.log(r)
-
                 } else if (r.status === 201) {
                     r.json().then(data => {
                         onAddBook(data)

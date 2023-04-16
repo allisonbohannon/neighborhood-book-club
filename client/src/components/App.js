@@ -104,17 +104,17 @@ function App() {
   }
   //ensure user login prior to showing page
 
-  if (!currentUser) return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Login
-                />} />
-        <Route path="/signup" element={<SignUp
-                  onAddUser={onAddUser}
-                />} />
-      </Routes>
-    </div>
-    ); 
+  // if (!currentUser) return (
+  //   <div>
+  //     <Routes>
+  //       <Route path="/" element={<Login
+  //               />} />
+  //       <Route path="/signup" element={<SignUp
+  //                 onAddUser={onAddUser}
+  //               />} />
+  //     </Routes>
+  //   </div>
+  //   ); 
 
   return (
     <div>

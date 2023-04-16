@@ -16,6 +16,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = find_user
+    user.update(user_params)
+    render json: user, include: ['reading_lists', 'reading_lists.book']
+  end
+
   def show 
       user = find_user
       render json: user, include: ['reading_lists', 'reading_lists.book']

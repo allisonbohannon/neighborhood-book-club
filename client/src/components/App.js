@@ -155,6 +155,12 @@ function App() {
                 <Route path="/users/:id" element={<Users
                    users={users}
                 />} />
+                <Route path="/login" element={<Login
+                   users={users}
+                />} />
+                <Route path="/signup" element={<SignUp 
+                    onAddUser={onAddUser}
+                />} />
                 <Route path="/" element={<Home
                 />} />
                

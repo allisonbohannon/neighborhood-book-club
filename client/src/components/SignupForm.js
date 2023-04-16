@@ -18,6 +18,9 @@ function SignUpForm({onAddUser}) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log({username,
+      email,
+      zipcode})
 
     setErrors([]);
     setIsLoading(true);
@@ -74,10 +77,10 @@ function SignUpForm({onAddUser}) {
           />
         </FormField>
         <FormField>
-          <Label htmlFor="zip">Zipcode</Label>
+          <Label htmlFor="zipcode">Zipcode</Label>
           <Input
             type="text"
-            id="zip"
+            id="zipcode"
             autoComplete="off"
             value={zipcode}
             onChange={(e) => setZipcode(e.target.value)}

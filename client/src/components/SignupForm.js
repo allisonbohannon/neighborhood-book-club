@@ -11,7 +11,7 @@ function SignUpForm({onAddUser}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [zip, setZip] = useState("");
+  const [zipcode, setZipcode] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,7 @@ function SignUpForm({onAddUser}) {
       body: JSON.stringify({
         username,
         email,
-        zip,
+        zipcode,
         password,
         password_confirmation: passwordConfirmation,
       }),
@@ -79,8 +79,8 @@ function SignUpForm({onAddUser}) {
             type="text"
             id="zip"
             autoComplete="off"
-            value={zip}
-            onChange={(e) => setZip(e.target.value)}
+            value={zipcode}
+            onChange={(e) => setZipcode(e.target.value)}
           />
         </FormField>
         <FormField>

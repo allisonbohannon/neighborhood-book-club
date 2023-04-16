@@ -72,7 +72,7 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
       book_id: displayBook.id,
       zip_three: currentUser.zipcode.slice(0, 3),
       admin: currentUser.username,
-      status: "Active"
+      status: "Active", 
     };
     fetch("/book_clubs", {
           method: "POST",
@@ -83,8 +83,18 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
         }).then(r => r.json())
         .then(data => { 
           onAddBookClub(data)
-          navigate(`/bookclubs/${data.id}`)
-        });
+          fetch("/book_club_members", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              user_id: currentUser.id, 
+              book_id: displayBook.id,
+              book_club_id: data.id
+            }),
+          }).then(r => r.json())
+          navigate(`/bookclubs/${data.id}`)})
   };
 
   const displayAvgRating = () =>  <StarRatingShow rating={displayBook.average_rating}/>

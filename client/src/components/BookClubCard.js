@@ -14,7 +14,7 @@ const BookClubCard = ({club}) => {
   return (
     <CardActionArea onClick={handleClick}>
         <p>Check out this club!</p>
-        <p>Total Members: </p>
+        <p>Total Members: {club.total_members}</p>
         <p>Active since: {club.created_at} </p>
         <p>{club.admin === currentUser.username ? "ADMIN" : "" }</p>
     </CardActionArea>

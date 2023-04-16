@@ -42,7 +42,10 @@ function SignUpForm({onAddUser}) {
           navigate(`/`)
           ;
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((err) => {
+          console.log(err.errors)
+          setErrors(err.errors)
+        });
       }
     });
   }

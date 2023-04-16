@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   def index
     @messages = Message.all
 
-    render json: @messages
+    render json: @messages.order(posted_date: :desc)
   end
 
   # GET /messages/1

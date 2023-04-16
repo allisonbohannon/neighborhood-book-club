@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_15_023110) do
+ActiveRecord::Schema.define(version: 2023_04_16_213049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 2023_04_15_023110) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "book_club_member_id", null: false
+    t.string "message"
+    t.integer "posted_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_club_member_id"], name: "index_messages_on_book_club_member_id"
+  end
+
   create_table "reading_lists", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "book_id", null: false
@@ -76,6 +85,7 @@ ActiveRecord::Schema.define(version: 2023_04_15_023110) do
   add_foreign_key "book_club_members", "book_clubs"
   add_foreign_key "book_club_members", "users"
   add_foreign_key "book_clubs", "books"
+  add_foreign_key "messages", "book_club_members"
   add_foreign_key "reading_lists", "books"
   add_foreign_key "reading_lists", "users"
 end

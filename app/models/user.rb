@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
     has_many :book_club_members
     has_many :book_clubs, through: :book_club_members
+    has_many :messages, through: :book_club_members
 
     validates :username, :email, :zipcode, presence: true
     validates :username, uniqueness: { message: "%{value} is already taken"}

@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Books from "../pages/Books";
 import Users from "../pages/Users";
 import BookPage from "../pages/BookPage";
+import BookClubPage from "../pages/BookClubPage";
 import EditCommentForm from "../pages/EditCommentForm";
 import ShowCommentForm from "../pages/ShowCommentForm";
 import AddCommentForm from "../pages/AddCommentForm";
@@ -19,6 +20,7 @@ function App() {
   const { currentUser, setCurrentUser} = useContext(UserContext)
   const [books, setBooks] = useState([])
   const [users, setUsers] = useState([])
+  const [bookClubs, setBookClubs] = useState([])
 
 // Check sessions to see whether a user is logged in
   useEffect(() => {
@@ -41,18 +43,23 @@ function App() {
     .then(r => r.json())
     .then(data => setUsers(data))
 
-  }, [])
+    fetch(`/book_clubs`)
+    .then(r => r.json())
+    .then(data => setBookClubs(data))
 
-  const onAddComment = (comment) => {
-    // setComments([...comments, comment])
-  }
+  }, []);
 
   const onAddBook = (newBook) => {
       setBooks([...books, newBook])
-    }
+  };
+
+  const onAddBookClub = (newBookClub) => {
+    setBookClubs([...bookClubs, newBookClub])
+    onUpdateBook(newBookClub.book_id)
+  };
 
   const onUpdateBook = (bookId) => {
-      fetch(`/users/${bookId}`)
+      fetch(`/books/${bookId}`)
       .then(r => r.json())
       .then(data => {
         setBooks((books)=> 
@@ -60,19 +67,7 @@ function App() {
             return book.id === bookId ? data : book
         })
       )}
-    )};
-
-  const onAddBookClub = (newBookClub) => {
-    const updatedBooks = books.map(book => {
-      if (book.id = newBookClub.book_id) {
-        return {...book, bookclubs:{...book.bookclubs, newBookClub}}
-      } else {
-        return book
-      }
-    })
-
-    setBooks(updatedBooks)
-  }
+  )};
 
   const onUpdateUser = (userId) => {
     fetch(`/users/${userId}`)
@@ -131,16 +126,23 @@ function App() {
                   books={books}
                   users={users}
                   onUpdateUser={onUpdateUser}
+                  onUpdateBook={onUpdateBook}
                   onAddBookClub={onAddBookClub}
                 />}/>
-                 <Route path="/books/:bookId/bookclubs/:book_club_id" element={<EditCommentForm
+                 <Route path="/books/:bookId/bookclubs/:bookClubId" element={<BookClubPage
                   books={books}
                   users={users}
+                  bookClubs={bookClubs}
+                />}/>
+                  <Route path="/bookclubs/:bookClubId" element={<BookClubPage
+                  books={books}
+                  users={users}
+                  bookClubs={bookClubs}
                 />}/>
                  <Route path="/bookclub/:bookclubId/messages/new" element={<AddCommentForm
                    books={books}
                    users={users}
-                   onAddComment={onAddComment}
+                   bookClubs={bookClubs}
                 />}/>
                    <Route path="/bookclub/:bookclubId/messages/:messageId/edit" element={<AddCommentForm
                    books={books}

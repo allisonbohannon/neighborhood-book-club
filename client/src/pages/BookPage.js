@@ -7,9 +7,10 @@ import StarRatingShow from '../components/StarRatingShow';
 import StarRatingEdit from '../components/StarRatingEdit';
 import { UserContext } from '../context/User';
 import { Box } from '@mui/system';
+import BookClubCard from '../components/BookClubCard';
 
 
-const BookPage = ({books, onAddBookClub, onUpdateUser}) => {
+const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
   const { bookId } = useParams();
 
   const {currentUser} = useContext(UserContext);
@@ -26,7 +27,8 @@ const BookPage = ({books, onAddBookClub, onUpdateUser}) => {
 
   let localBookClub = null; 
   if (displayBook.book_clubs.length>=1) {
-    localBookClub = displayBook.book_clubs.find(item => item.zip_three === currentUser.currentUser.zipcode.slice(0, 3))
+    localBookClub = displayBook.book_clubs.filter(club => club.status === "Active")
+      .find(club => club.zip_three == currentUser.zipcode.slice(0, 3))
   }
   
   const handleClick = () => {
@@ -85,7 +87,7 @@ const BookPage = ({books, onAddBookClub, onUpdateUser}) => {
         });
   };
 
-  const displayAvgRating = () =>  <StarRatingShow rating={displayBook.avgerage_rating}/>
+  const displayAvgRating = () =>  <StarRatingShow rating={displayBook.average_rating}/>
   const displayUserRating = () => <div>Your Rating: <StarRatingEdit userRating={0} onChange={handleUpdateReadingList} /></div> 
 
   return (
@@ -126,7 +128,7 @@ const BookPage = ({books, onAddBookClub, onUpdateUser}) => {
       
       <Box textAlign="center" style={{margin:"1em"}}>
          {/* if a book club exists, display the book club info here, otherwise, link to create a new bookclub */}
-        { displayBook.bookClub ? "Book Club Info" : <Button onClick={handleAddBookClub}>Start a book club!</Button>}
+        { localBookClub ? <BookClubCard club={localBookClub} /> : <Button onClick={handleAddBookClub}>Start a book club!</Button>}
       </Box>
      
 

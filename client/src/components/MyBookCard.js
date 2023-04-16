@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react'
+import { Link } from 'react-router-dom';
 import { Button, Card, Box, CardActionArea } from '@mui/material'
 import { CardHeader, CardHeading, CardBody } from '../styles'
 import { UserContext } from '../context/User'
@@ -8,7 +9,9 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
 
     const { currentUser } = useContext(UserContext)
 
-    const {id, rating, read_status, book, user } = item
+    const {id, rating, read_status, book } = item
+
+    const [readStatus, setReadStatus] = useState(read_status)
   
     const handleUpdateReadStatus = () => {
         let newStatus;
@@ -24,7 +27,7 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
             },
             body: JSON.stringify({read_status: newStatus}),
             }).then(r => r.json())
-            .then(data => console.log(data))
+            .then(data => setReadStatus(newStatus))
             .then(onUpdateUser(currentUser.id))
         };
         
@@ -34,10 +37,9 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
             headers: { "Content-Type": "application/json" }
             })
             .then(r => r.json())
-            .then(data => console.log(data))
-        fetch(`/users/${currentUser.id}`)
-            .then(r => r.json())
-            .then(data => onUpdateUser(data))
+            .then(data => {
+                onUpdateUser(currentUser.id)
+                setReadStatus(null)})
         };
 
     const onRatingChange = (newRating) => {
@@ -54,19 +56,32 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
     } 
 
   return (
-        <Card variant='outlined' style={{display:"inline-flex", margin:"3px"}}>
+        <Card variant='outlined' style={{display:"inline-flex", margin:"10px", minWidth:"100%", maxWidth:"100%"}}>
             <Box>
                 <img src={book.cover_url} style={{displayStyle:"block", height:"15em"}} />
             </Box>
             <Box>
                 <CardHeader>
-                    <CardHeading>{book.title}</CardHeading>
+                    <CardHeading>
+                        <Link to={`/books/${book.id}`}
+                                style={{display: 'inline-block',
+                                fontSize: '1em',
+                                textDecoration: 'none',
+                                color: '#472d30',
+                                justifySelf: 'center',
+                                padding:'1em',
+                                cursor: 'pointer',
+                                transition: 'color 0.25s ease-in',
+                                '&':'hover {color: #135;}'}}
+                              >{book.title}
+                        </Link>
+                    </CardHeading>
                 </CardHeader>
                 <Box textAlign="left" style={{padding:"3px"}}>
                     <p>Written By: {book.author}</p>
                     <p>Published {book.published_date}</p>
                     <p>Genres: {book.subject}</p>
-                    <p>My rating: <StarRatingEdit userRating={rating} onRatingChange={onRatingChange} /></p>
+                    <p>{read_status === "Have read"? <StarRatingEdit userRating={rating} onRatingChange={onRatingChange} /> : "" }</p>
                 </Box>
                 <Box textAlign="center">
                     <Button 

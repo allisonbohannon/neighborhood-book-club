@@ -16,7 +16,7 @@ import { UserContext } from "../context/User";
 
 function App() {
 
-  const { currentUser, setCurrentUser} =useContext(UserContext)
+  const { currentUser, setCurrentUser} = useContext(UserContext)
   const [books, setBooks] = useState([])
   const [users, setUsers] = useState([])
 
@@ -81,9 +81,12 @@ function App() {
       setUsers((users)=> 
         users.map((user)=> {
           return user.id === userId ? data : user
-      })
-    )}
-  )};
+      }));
+      if (currentUser.id === userId) {
+        setCurrentUser(data)
+      };
+    })
+  };
 
   const onEditComment = (updatedComment) => {
     // setComments((comments)=> 

@@ -9,9 +9,7 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
     const { currentUser } = useContext(UserContext)
 
     const {id, rating, read_status, book, user } = item
-    const {title, author, pages, cover_url, published_date, subject } = book 
-
-
+  
     const handleUpdateReadStatus = () => {
         let newStatus;
         if (read_status === "Want to read") {
@@ -27,8 +25,7 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
             body: JSON.stringify({read_status: newStatus}),
             }).then(r => r.json())
             .then(data => console.log(data))
-
-        onUpdateUser(currentUser.id)
+            .then(onUpdateUser(currentUser.id))
         };
         
     const handleRemoveFromList = () => {
@@ -59,16 +56,16 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
   return (
         <Card variant='outlined' style={{display:"inline-flex", margin:"3px"}}>
             <Box>
-                <img src={cover_url} style={{displayStyle:"block", height:"15em"}} />
+                <img src={book.cover_url} style={{displayStyle:"block", height:"15em"}} />
             </Box>
             <Box>
                 <CardHeader>
-                    <CardHeading>{title}</CardHeading>
+                    <CardHeading>{book.title}</CardHeading>
                 </CardHeader>
                 <Box textAlign="left" style={{padding:"3px"}}>
-                    <p>Written By: {author}</p>
-                    <p>Published {published_date}</p>
-                    <p>Genres: {subject}</p>
+                    <p>Written By: {book.author}</p>
+                    <p>Published {book.published_date}</p>
+                    <p>Genres: {book.subject}</p>
                     <p>My rating: <StarRatingEdit userRating={rating} onRatingChange={onRatingChange} /></p>
                 </Box>
                 <Box textAlign="center">

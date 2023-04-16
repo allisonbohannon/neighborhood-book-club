@@ -5,18 +5,16 @@ import { UserContext } from '../context/User'
 import { textAlign } from '@mui/system'
 import MyBookCard from '../components/MyBookCard'
 
-const MyBooks = ({books, users, onUpdateUser, onUpdateBook}) => {
+const MyBooks = ({onUpdateUser, onUpdateBook}) => {
 
-    const { currentUser, setCurrentUser } = useContext(UserContext)
-
-    const displayUser = users.find(user => user.id === currentUser.id)
+    const { currentUser } = useContext(UserContext) 
   
-    const displayReadList = displayUser.reading_lists.filter(item => item.read_status === "Have read")
+    const displayReadList = currentUser.reading_lists.filter(item => item.read_status === "Have read")
         .map(item=> {
             return <li key={item.id} style={{listStyle:"none"}}><MyBookCard item={item} onUpdateUser={onUpdateUser} onUpdateBook={onUpdateBook} /></li>
     });
 
-    const displayWantList = displayUser.reading_lists.filter(item => item.read_status === "Want to read")
+    const displayWantList = currentUser.reading_lists.filter(item => item.read_status === "Want to read")
         .map(item=> {
             return <li key={item.id} style={{listStyle:"none"}}><MyBookCard item={item} onUpdateUser={onUpdateUser} onUpdateBook={onUpdateBook} /></li>
     });

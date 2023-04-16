@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+  resources :messages
   resources :book_club_members
   resources :book_clubs
   resources :users 

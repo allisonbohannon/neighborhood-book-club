@@ -7,19 +7,11 @@ class Book < ApplicationRecord
     has_many :book_club_members, through: :book_clubs
 
     def total_ratings 
-        self.reading_lists.count {|item| !item.rating.nil? }
+        self.reading_lists.count(:rating)
     end
 
     def average_rating 
-        holder_arr = []
-       if self.reading_lists.count != 0 
-            self.reading_lists.each do |item|
-                    holder_arr << item.rating 
-             end
-            holder_arr.sum/total_ratings
-        else
-            0
-        end
+        self.reading_lists.average(:rating)
     end
 
    

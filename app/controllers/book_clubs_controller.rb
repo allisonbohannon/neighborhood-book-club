@@ -10,7 +10,7 @@ class BookClubsController < ApplicationController
 
   # GET /book_clubs/1
   def show
-    render json: @book_club
+    render json: @book_club, include: ['book_club_members', 'book_club_members.user']
   end
 
   # POST /book_clubs

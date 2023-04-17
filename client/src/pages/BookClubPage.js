@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../context/User';
 import { Box } from '@mui/system';
 import { Paper, Card, Button, List, ListItem, ListItemText } from '@mui/material';
@@ -9,6 +9,7 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
 
   const { bookClubId } = useParams();
   const { currentUser } = useContext(UserContext); 
+  const navigate = useNavigate()
 
   const displayClub = bookClubs.find(club => club.id === parseInt(bookClubId));
 
@@ -61,11 +62,7 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
               <ListItemText primary={message.message} 
                             secondary={`${member.user.username}, ${message.posted_date}`}
                             />
-              
-
             </ListItem>)})})
-
-
 
   return (
     <Container >
@@ -74,7 +71,7 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
           <p>{displayClub.book.title}</p>
         </Card>
         <Box textAlign={'center'}>
-          <Button >View Users ({displayClub.total_members})</Button>
+          <Button onClick={() => {navigate(`/bookclubs/${bookClubId}/members`)}}>View Members ({displayClub.total_members})</Button>
           <Button onClick={handleUpdateMembership}>{userMemberStatus === "Active"? "Leave Club" :"Join Club"}</Button>
         </Box>
       </Box>

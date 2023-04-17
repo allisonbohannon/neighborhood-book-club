@@ -1,28 +1,24 @@
 import React from 'react';  
-import { Card, CardBody, CardHeader, CardHeading } from '../styles';
-import StarRatingShow from './StarRatingShow';
+import { CardActionArea, Card, CardContent, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
-const UserCard = ({user}) => {    
-        
-    const userRatings = user.visits.map(visit => { 
-            return <li key={visit.id}>{visit.winery.name}: <StarRatingShow rating={visit.rating}/></li>
-    })
- 
+
+const UserCard = ({user}) => {  
+    
+    const navigate = useNavigate(); 
   
  return (
-    <Card style={{height:'20em'}}>
-        <CardHeader>
-            <CardHeading style={{position:"absolute", top:"0px", left:"3px"}}>{user.username}</CardHeading>
-        </CardHeader>
-        <CardBody style={{position:"absolute", top:"5em"}}>
-            <CardHeading style={{'font-size':'1.1em', color:'rgb(150,78,108)' }}>Wineries Visited:</CardHeading>
-            <div style={{height:"12em", overflow:"auto"}} >
-                {userRatings}
-            </div>
-        </CardBody>
-    </Card>
-  
+   <CardActionArea onClick={() => navigate(`/users/${user.id}`)}>
+        <Card variant="outlined">
+            <CardContent>
+                <Typography>{user.username}</Typography>
+                <Typography variant="body2" color="text.secondary">
+                    {user.bio}
+                </Typography>
+            </CardContent>
+        </Card>
+   </CardActionArea>
   )
 }
 

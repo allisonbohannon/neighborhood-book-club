@@ -6,9 +6,7 @@ import Books from "../pages/Books";
 import Users from "../pages/Users";
 import BookPage from "../pages/BookPage";
 import BookClubPage from "../pages/BookClubPage";
-import EditCommentForm from "../pages/EditCommentForm";
-import ShowCommentForm from "../pages/ShowCommentForm";
-import AddCommentForm from "../pages/AddCommentForm";
+import BookClubMembersPage from "../pages/BookClubMembersPage";
 import MyBooks from "../pages/MyBooks";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
@@ -98,34 +96,6 @@ function App() {
     })
   };
 
-  const onEditComment = (updatedComment) => {
-    // setComments((comments)=> 
-    //   comments.map((comment)=> {
-    //     return comment.id === updatedComment.id ? updatedComment : comment
-    // })
-  // )
-}
-
-  const onDeleteComment = (deletedComment) => {
-    // setComments((comments) => 
-    //   comments.filter((comment) => comment.id !== deletedComment.id)
-  // )
-}
-
-  //ensure user login prior to showing page
-
-  // if (!currentUser) return (
-  //   <div>
-  //     <Routes>
-  //       <Route path="/" element={<Login
-  //               />} />
-  //       <Route path="/signup" element={<SignUp
-  //                 onAddUser={onAddUser}
-  //               />} />
-  //     </Routes>
-  //   </div>
-  //   ); 
-
   return (
     <div>
             <NavigationBar />
@@ -151,14 +121,17 @@ function App() {
                   onUpdateBookClub={onUpdateBookClub}
                   onUpdateUser={onUpdateUser}
                 />}/>
-                 <Route path="/bookclub/:bookclubId/messages/new" element={<AddCommentForm
+                <Route path="/bookclubs/:bookClubId/members" element={<BookClubMembersPage
+                  bookClubs={bookClubs}
+                />}/>
+                 {/* <Route path="/bookclub/:bookclubId/messages/new" element={<AddCommentForm
                    bookClubs={bookClubs}
                    onUpdateBookClub={onUpdateBookClub}
-                />}/>
-                   <Route path="/bookclub/:bookclubId/messages/:messageId/edit" element={<AddCommentForm
+                />}/> */}
+                   {/* <Route path="/bookclub/:bookclubId/messages/:messageId/edit" element={<AddCommentForm
                    bookClubs={bookClubs}
                    onUpdateBookClub={onUpdateBookClub}
-                />}/>
+                />}/> */}
 
                 <Route path="/mybooks" element={<MyBooks
                     books={books}

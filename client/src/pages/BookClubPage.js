@@ -1,15 +1,21 @@
 import React, { useContext, useState } from 'react'
+import NewMessage from '../components/NewMessage';
 import { useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../context/User';
 import { Box } from '@mui/system';
-import { Paper, Card, Button, List, ListItem, ListItemText } from '@mui/material';
+import { Paper, Card, Button, List, IconButton } from '@mui/material';
 import { Container } from '../styles';
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import MessageCard from '../components/MessageCard';
+
 
 const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
 
   const { bookClubId } = useParams();
   const { currentUser } = useContext(UserContext); 
   const navigate = useNavigate()
+
+  const [showInput, setShowInput] = useState(false)
 
   const displayClub = bookClubs.find(club => club.id === parseInt(bookClubId));
 
@@ -57,12 +63,9 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
   }
 
   const displayMessages = displayClub.book_club_members.map(member => {
-    return member.messages.map(message =>  {
-    return (<ListItem key={message.id} >
-              <ListItemText primary={message.message} 
-                            secondary={`${member.user.username}, ${message.posted_date}`}
-                            />
-            </ListItem>)})})
+    return member.messages.map(message =>  { 
+      return <li key={message.id}><MessageCard member={member} message={message} admin={displayClub.admin} onUpdateBookClub={onUpdateBookClub} clubId={displayClub.id} /></li>
+   })})
 
   return (
     <Container >
@@ -77,8 +80,14 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
       </Box>
       <br></br>
       <Box>
-        <Box textAlign={'center'} style={{backgroundColor:'blue', color:"white"}}>Book Club Message Board - No Spoilers!</Box>
-        <Paper elevation={3} styles={{minWidth:"80%", maxWidth:"80% "}}>
+        <Box textAlign={'center'} style={{backgroundColor:'blue', color:"white"}}>
+            <p style={{display:"inline-block"}}>Book Club Message Board - No Spoilers!</p>
+            <IconButton onClick={()=> setShowInput(true)} style={{display:"inline-block", float:"right"}} >
+              <AddCommentIcon color="primary" fontSize='large' />
+            </IconButton>
+        </Box>
+        <Paper variant="outlined" styles={{minWidth:"80%", maxWidth:"80% "}}>
+          {showInput? <NewMessage memberId={userMember.id} clubId={displayClub.id} onUpdateBookClub={onUpdateBookClub} setShowInput={setShowInput} /> : ""}
           <List>{displayMessages}</List>
         </Paper>
       </Box>

@@ -13,7 +13,7 @@ const NavigationBar = () =>  {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
               setCurrentUser(null)
-              navigate(`/`);
+              navigate(`/login`);
             } else {
                 console.log("Unable to log out")
             }

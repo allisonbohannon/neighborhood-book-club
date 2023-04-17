@@ -46,6 +46,6 @@ class MessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def message_params
-      params.require(:message).permit(:book_club_member_id, :message, :posted_date)
+      params.permit(:book_club_member_id, :message)
     end
 end

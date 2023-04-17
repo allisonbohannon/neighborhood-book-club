@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ResultCard from '../components/ResultCard';
-import { Container, FormField, Input, CardButton, Error } from '../styles'
+import { Container, Error } from '../styles'
+import { FormControl, TextField, Button, Typography} from '@mui/material';
 
 
 const Books = ({onAddBook}) => {
@@ -9,6 +10,7 @@ const Books = ({onAddBook}) => {
     const [error, setError] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [searchResults, setSearchResults] = useState([])
+    const [searchActive, setSearchActive ] = useState(false)
 
 
     const handleSubmit = (e) => {
@@ -24,6 +26,7 @@ const Books = ({onAddBook}) => {
             fetch(`https://openlibrary.org/search.json?${parsedSearch}`)
             .then(r => r.json())
             .then(data => {
+                setSearchActive(true)
                 setSearchResults(data.docs)
                 setIsLoading(false)
             })
@@ -31,7 +34,7 @@ const Books = ({onAddBook}) => {
     }
 
     let displayResults; 
-    if (searchResults.length == 0) {
+    if (searchActive === true && searchResults.length == 0) {
         displayResults = "Hmm... no matches found"
     } else {
         displayResults = searchResults.filter(result => result.isbn )
@@ -43,25 +46,26 @@ const Books = ({onAddBook}) => {
   return (
     <Container>
         <form onSubmit={handleSubmit}>
-            <FormField>
-                <Input
+            <FormControl fullWidth>
+                <TextField
                 type="text"
                 id="searchTerm"
                 autoComplete="off"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 >
-                </Input>
-            </FormField>
-            <FormField>
-                <CardButton variant="fill" color="primary" type="submit">
-                    {isLoading ? "Loading..." : "Search"}
-                </CardButton>
-            </FormField>
-            <FormField>
+                </TextField>
+            </FormControl>
+                <Button style={{float:"right"}} type="submit" >
+                    Search
+                </Button>
+            <FormControl>
                 {error? <Error>{error}</Error> : "" }
-            </FormField>
+            </FormControl>
+            <br></br>
+            <Typography>{isLoading ? "Loading..." : ""}</Typography>
         </form>
+        <br></br>
          {displayResults}
     </Container>
   )

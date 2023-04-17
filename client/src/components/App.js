@@ -53,11 +53,6 @@ function App() {
       setBooks([...books, newBook])
   };
 
-  const onAddBookClub = (newBookClub) => {
-    setBookClubs([...bookClubs, newBookClub])
-    onUpdateBook(newBookClub.book_id)
-  };
-
   const onUpdateBook = (bookId) => {
       fetch(`/books/${bookId}`)
       .then(r => r.json())
@@ -68,6 +63,10 @@ function App() {
         })
       )}
   )};
+
+  const onAddUser = (newUser) => {
+    setUsers([...users, newUser])
+};
 
   const onUpdateUser = (userId) => {
     fetch(`/users/${userId}`)
@@ -80,6 +79,22 @@ function App() {
       if (currentUser.id === userId) {
         setCurrentUser(data)
       };
+    })
+  };
+
+  const onAddBookClub = (newBookClub) => {
+    setBookClubs([...bookClubs, newBookClub])
+    onUpdateBook(newBookClub.book_id)
+  };
+
+  const onUpdateBookClub = (bookClubId) => {
+    fetch(`/book_clubs/${bookClubId}`)
+    .then(r => r.json())
+    .then(data => {
+      setBookClubs((bookClubs)=> 
+        bookClubs.map((club)=> {
+          return club.id === bookClubId ? data : club
+      }))
     })
   };
 
@@ -97,9 +112,6 @@ function App() {
   // )
 }
 
-  const onAddUser = (userObject) => {
-    setUsers([...users, userObject])
-  }
   //ensure user login prior to showing page
 
   // if (!currentUser) return (
@@ -130,25 +142,22 @@ function App() {
                   onAddBookClub={onAddBookClub}
                 />}/>
                  <Route path="/books/:bookId/bookclubs/:bookClubId" element={<BookClubPage
-                  books={books}
-                  users={users}
                   bookClubs={bookClubs}
+                  onUpdateBookClub={onUpdateBookClub}
+                  onUpdateUser={onUpdateUser}
                 />}/>
                   <Route path="/bookclubs/:bookClubId" element={<BookClubPage
-                  books={books}
-                  users={users}
                   bookClubs={bookClubs}
+                  onUpdateBookClub={onUpdateBookClub}
+                  onUpdateUser={onUpdateUser}
                 />}/>
                  <Route path="/bookclub/:bookclubId/messages/new" element={<AddCommentForm
-                   books={books}
-                   users={users}
                    bookClubs={bookClubs}
+                   onUpdateBookClub={onUpdateBookClub}
                 />}/>
                    <Route path="/bookclub/:bookclubId/messages/:messageId/edit" element={<AddCommentForm
-                   books={books}
-                   users={users}
-                   onEditComment={onEditComment}
-                   onDeleteComment={onDeleteComment}
+                   bookClubs={bookClubs}
+                   onUpdateBookClub={onUpdateBookClub}
                 />}/>
 
                 <Route path="/mybooks" element={<MyBooks

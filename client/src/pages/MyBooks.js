@@ -9,26 +9,22 @@ const MyBooks = ({onUpdateUser, onUpdateBook}) => {
 
     const { currentUser } = useContext(UserContext) 
   
-    const displayReadList = currentUser.reading_lists.filter(item => item.read_status === "Have read")
-        .map(item=> {
+    const displayList = (status) => {
+        return currentUser.reading_lists.filter(item => item.read_status === status)
+         .map(item=> {
             return <li key={item.id} style={{listStyle:"none"}}><MyBookCard item={item} onUpdateUser={onUpdateUser} onUpdateBook={onUpdateBook} /></li>
-    });
-
-    const displayWantList = currentUser.reading_lists.filter(item => item.read_status === "Want to read")
-        .map(item=> {
-            return <li key={item.id} style={{listStyle:"none"}}><MyBookCard item={item} onUpdateUser={onUpdateUser} onUpdateBook={onUpdateBook} /></li>
-    });
+    })};
 
   return (
     <Container>
          <Grid container textAlign="center">
             <Grid item xs={5} styles >
                 <h1>Have Read</h1>
-                {displayReadList}
+                {displayList("Have read")}
             </Grid>
             <Grid item xs={5}  >
                 <h1>Want to Read</h1>
-                {displayWantList}
+                {displayList("Want to read")}
             </Grid>
         </Grid>
     </Container>

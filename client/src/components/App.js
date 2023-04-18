@@ -156,7 +156,6 @@ function App() {
                    users={users}
                 />} />
                 <Route path="/login" element={<Login
-                   users={users}
                 />} />
                 <Route path="/signup" element={<SignUp 
                     onAddUser={onAddUser}

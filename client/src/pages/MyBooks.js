@@ -18,7 +18,7 @@ const MyBooks = ({onUpdateUser, onUpdateBook}) => {
   return (
     <Container>
          <Grid container textAlign="center">
-            <Grid item xs={5} styles >
+            <Grid item xs={5} >
                 <h1>Have Read</h1>
                 {displayList("Have read")}
             </Grid>

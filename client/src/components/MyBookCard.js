@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom';
-import { Button, Card, Box, CardActionArea } from '@mui/material'
+import { Button, Card, Box } from '@mui/material'
 import { CardHeader, CardHeading, CardBody } from '../styles'
 import { UserContext } from '../context/User'
 import StarRatingEdit from './StarRatingEdit'

@@ -19,6 +19,9 @@ function App() {
   const [books, setBooks] = useState([])
   const [users, setUsers] = useState([])
   const [bookClubs, setBookClubs] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+  const [searchActive, setSearchActive ] = useState(false)
 
 // Check sessions to see whether a user is logged in
   useEffect(() => {
@@ -98,10 +101,17 @@ function App() {
 
   return (
     <div>
-            <NavigationBar />
+            <NavigationBar 
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              setSearchActive={setSearchActive}
+              setSearchResults={setSearchResults}
+            />
             <Routes>
                 <Route path="/books" element={<Books
-                  books={books}
+                  searchTerm={searchTerm}
+                  searchActive={searchActive}
+                  searchResults={searchResults}
                   onAddBook={onAddBook}
                 />}/> 
                 <Route path="/books/:bookId" element={<BookPage
@@ -124,15 +134,6 @@ function App() {
                 <Route path="/bookclubs/:bookClubId/members" element={<BookClubMembersPage
                   bookClubs={bookClubs}
                 />}/>
-                 {/* <Route path="/bookclub/:bookclubId/messages/new" element={<AddCommentForm
-                   bookClubs={bookClubs}
-                   onUpdateBookClub={onUpdateBookClub}
-                />}/> */}
-                   {/* <Route path="/bookclub/:bookclubId/messages/:messageId/edit" element={<AddCommentForm
-                   bookClubs={bookClubs}
-                   onUpdateBookClub={onUpdateBookClub}
-                />}/> */}
-
                 <Route path="/mybooks" element={<MyBooks
                     books={books}
                     users={users}

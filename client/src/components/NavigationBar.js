@@ -2,34 +2,32 @@ import React, {useContext, useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { UserContext } from '../context/User';
-import { styled, alpha } from '@mui/material/styles';
-import { AppBar,Toolbar, CssBaseline, Typography, makeStyles, Box, IconButton, Menu, MenuItem, InputBase} from "@material-ui/core";
+import SearchBar from './SearchBar';
+import { AppBar,Toolbar, CssBaseline, Typography, makeStyles, Box, IconButton, Menu, MenuItem} from "@material-ui/core";
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import SearchIcon from '@mui/icons-material/Search';
+
 import pic from '../images/logo.png';
 
 const useStyles = makeStyles((theme) => ({
     navlinks: {
-      marginLeft: theme.spacing(5),
       display: "inline-flex",
-      justifyContent: "space-evenly"
+
     },
    logo: {
+      postiion:"relative",
       flexGrow: "1",
       cursor: "pointer",
       maxHeight: "100%",
-      marginLeft: theme.spacing(1)
     },
     link: {
         textDecoration: "none",
         position: "relative",
         top: "1em",
-        left: ".1em",
         color: "white",
         fontSize: "20px",
         "&:hover": {
           color: "white",
-          borderBottom: "1px solid white",
+          borderBottom: "0px solid white",
         },
       },
     menulink: {
@@ -37,70 +35,28 @@ const useStyles = makeStyles((theme) => ({
       color: "black",
       fontSize: "20px",
       "&:hover": {
-        color: "purple",
+        color: "black",
         borderBottom: "1px solid white",
       },
     },
   }));
 
-  const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    marginTop:"1em",
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  }));
-  
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }));
-  
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: '20ch',
-      },
-    },
-  }));
-  
-
-const NavigationBar = () =>  {
+const NavigationBar = ({searchTerm, setSearchTerm, setSearchActive, setSearchResults}) =>  {
 
     const classes = useStyles();
 
     const [anchorElUser, setAnchorElUser] = useState(null);
 
-    const { currentUser, setCurrentUser } = useContext(UserContext)
-    console.log(currentUser)
+    const { setCurrentUser } = useContext(UserContext)
     const navigate = useNavigate()
 
-    const menuItems = [{title: 'Profile', url: '/profile'}, {title: 'My Books', url: '/mybooks'}, {title:'My BookClubs', url:'/mybookclubs'}, {title:'Logout', url:'/logout'}];
+    const menuItems = [{title: 'Profile', url: '/profile'}, {title: 'My Books', url: '/mybooks'}, {title:'My BookClubs', url:'/mybookclubs'}];
 
     const handleLogout = () =>{
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
               setCurrentUser(null)
+              setAnchorElUser(null)
               navigate(`/login`);
             } else {
                 console.log("Unable to log out")
@@ -117,34 +73,22 @@ const NavigationBar = () =>  {
       };
 
     return (
-        <AppBar position="static">
+        <AppBar position="fixed" >
             <CssBaseline />
-            <Toolbar style={{display:"inline-block", top:"50%"}}>
-                <div className={classes.navlinks}>
-                    <Box>
+            <Toolbar >
+                <div className={classes.navlinks} >
+                    {/* <Box className={classes.logo}>
+                        <img src={pic} alt="logo" style={{height:"2em", postition:"relative"}}></img>
+                    </Box> */}
+                    <Box style={{displayStyle:"block", position:"relative", left:"1", bottom:'1.5em'}}>
                         <Typography><Link to='/' className={classes.link}>Neighborhood Book Club</Link></Typography>
-                         {/* <Link
-                            to="/"
-                            exact="true"
-                            className={classes.logo}
-                            >
-                            <img src={pic} alt="logo" style={{height:"8em"}}></img>
-                        </Link> */}
                     </Box>
-                    <Box>
-                    <Search>
-                        <SearchIconWrapper>
-                        <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                             placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
+                    <Box style={{position:"absolute", right:"5%", bottom:'1em'}}>
+                        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} setSearchActive={setSearchActive} setSearchResults={setSearchResults}/>
                     </Box>
-                    <Box>
-                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} >
-                             <AccountCircle sx={{ width: 32, height: 32 }}/>
+                    <Box style={{position:"absolute", right:0, bottom:0}}>
+                        <IconButton onClick={handleOpenUserMenu} sx={{ p:0 }} >
+                             <AccountCircle sx={{ width:'2em', height:'2em', color:'white' }}/>
                         </IconButton>
                         <Menu
                             sx={{ mt: '45px' }}
@@ -167,13 +111,11 @@ const NavigationBar = () =>  {
                                 <Typography textAlign="center"><Link to={item.url} className={classes.menulink} >{item.title}</Link></Typography>
                                 </MenuItem>
                             ))} 
+                            <MenuItem onClick={handleLogout}>
+                                <Typography textAlign="center"className={classes.menulink} >Logout</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
-                   
-                  
-                    {/* {currentUser?  (
-                            <Link><Button variant="outline" onClick={handleLogout}>Logout</Button></Link>) : (
-                            <Link to="/Login"><Button>Log In</Button></Link>)} */}
                 </div>
             </Toolbar>
                

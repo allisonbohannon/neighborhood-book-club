@@ -99,6 +99,18 @@ function App() {
     })
   };
 
+  if (!currentUser) return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Login
+                />} />
+        <Route path="/signup" element={<SignUp
+                  onAddUser={onAddUser}
+                />} />
+      </Routes>
+    </div>
+    ); 
+
   return (
     <div>
             <NavigationBar 

@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Link } from 'react-router-dom'
-import { CardButton, Error, Input, FormField, Label, Container} from "../styles";
+import { Error} from "../styles";
 import { UserContext } from "../context/User";
 import { useNavigate } from "react-router-dom";
+import { FormControl, TextField, Button, Box, Container } from "@mui/material";
 
 
 const LoginForm = () => {
@@ -44,45 +45,47 @@ const LoginForm = () => {
     }
   
     return (
-      <Container style ={{width:"40em"}}>
-         <form onSubmit={handleSubmit}>
-        <FormField>
-          <Label htmlFor="username">Username</Label>
-          <Input
-            type="text"
-            id="username"
-            autoComplete="off"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </FormField>
-        <FormField>
-          <Label htmlFor="password">Password</Label>
-          <Input
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormField>
-        <FormField>
-          <CardButton variant="fill" color="primary" type="submit">
-            {isLoading ? "Loading..." : "Login"}
-          </CardButton>
-        </FormField>
-        <FormField>
-          {error? <Error>{error}</Error> : "" }
-        </FormField>
-      </form>
-      <CardButton>
-            <Link 
-                style={{textDecoration:"none", color:"white"}}
-                to='/signup'> 
-                Not a Member? Sign up now!
-            </Link>
-          </CardButton>
+      <Container sx={{display:'flex', justifyContent:'center'}}>
+        <Box sx={{ display: 'block'}}>
+          <form onSubmit={handleSubmit}>
+            <FormControl fullWidth >
+              <TextField
+                type="text"
+                label="username"
+                id="username"
+                autoComplete="off"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                sx={{margin:'3px'}}
+              />
+              <TextField
+                type="password"
+                label="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                sx={{margin:'3px'}}
+              />
+              <Button variant="contained" color="primary" type="submit">
+                {isLoading ? "Loading..." : "Login"}
+              </Button>
+            </FormControl>
+            <FormControl>
+              {error? <Error>{error}</Error> : "" }
+            </FormControl>
+        </form>
+          <Button sx={{display:'block'}}>
+            <Link sx={{color:'black'}}
+                    style={{textDecoration:"none", color:"black"}}
+                    to='/signup'> 
+                    Not a Member? Sign up now!
+              </Link>
+          </Button>
+              
+        </Box>
       </Container>
+     
        );
    
   }

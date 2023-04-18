@@ -17,12 +17,17 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
 
   const displayBook = books.find(book => book.id === parseInt(bookId));
 
+    const [readStatus, setReadStatus] = useState();
+
   let userBook = null;
   if (currentUser.reading_lists.length >= 1) {
      userBook = currentUser.reading_lists.find(item => item.book_id === displayBook.id)
+     if (userBook) {
+      setReadStatus(userBook.read_status)
+     }
   };
 
-  const [readStatus, setReadStatus] = useState(userBook.read_status);
+
 
   let localBookClub = null; 
   if (displayBook.book_clubs.length>=1) {

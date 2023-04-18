@@ -1,7 +1,7 @@
-import React from 'react'
-import {useNavigate} from 'react-router-dom'
-import { CardBody, CardHeader, CardHeading } from '../styles'
-import {Card, CardActionArea} from '@mui/material'
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
+import {Card, CardActionArea, CardContent, CardMedia, Typography, Box} from '@mui/material';
+
 
 const ResultCard = ({result, onAddBook}) => {
     const navigate = useNavigate()
@@ -72,20 +72,25 @@ const ResultCard = ({result, onAddBook}) => {
 
 
   return (
-    <CardActionArea onClick={handleClick}>
-        <Card variant='outlined'>
-            <img src={url} style={{display:"inline-block"}} />
-            <CardHeader>
-                <CardHeading>{result.title}</CardHeading>
-            </CardHeader>
-            <CardBody>
-                <p>Written By: {result.author_name}</p>
-                <p>Published {result.first_publish_year}</p>
-                <p>Genres: {subject}</p>
-            </CardBody>
+    <CardActionArea onClick={handleClick} sx={{ width:"50%", height:"15em", margin:'1px', }}>
+        <Card variant='outlined' sx={{display: 'flex'}}>
+            <Box sx={{display:'block', alignSelf:'center', margin:'1em'}}>
+                <CardMedia component="img"
+                        image={url} 
+                        title={result.title}
+                        style={{display:"block", height:"8em"}}
+                        />
+            </Box>
+            <Box>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div" >{result.title}</Typography>
+                    <p>Written By: {result.author_name}</p>
+                    <p>Published {result.first_publish_year}</p>
+                    <p>Genres: {subject}</p>
+                </CardContent>
+            </Box>
         </Card>
     </CardActionArea>
-    
   )
 }
 

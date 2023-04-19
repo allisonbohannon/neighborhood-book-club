@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom';
-import { Button, Card, Box } from '@mui/material'
+import { Button, Card, CardMedia, Box, Typography } from '@mui/material'
 import { CardHeader, CardHeading, CardBody } from '../styles'
 import { UserContext } from '../context/User'
 import StarRatingEdit from './StarRatingEdit'
@@ -56,13 +56,17 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
     } 
 
   return (
-        <Card variant='outlined' style={{display:"inline-flex", margin:"10px", minWidth:"100%", maxWidth:"100%"}}>
-            <Box>
-                <img src={book.cover_url} style={{displayStyle:"block", height:"15em"}} />
+        <Card variant='outlined' sx={{display:"inline-flex", margin:"10px", padding:'.5em',minWidth:"100%", maxWidth:"100%", height:'20em', margin:'1px'}}>
+             <Box sx={{display:'block', alignSelf:'center', margin:'1em', minWidth:'40%', maxWidth:'40%', padding:'1em'}}>
+                <CardMedia component="img"
+                        image={book.cover_url} 
+                        title={book.title}
+                        style={{display:"block", maxHeight:"80%"}}
+                        />
             </Box>
-            <Box>
-                <CardHeader>
-                    <CardHeading>
+            <Box sx={{display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+                <Box sx={{borderBottom:"1px solid lightgray"}}>
+                    <Typography variant='h5'>
                         <Link to={`/books/${book.id}`}
                                 style={{display: 'inline-block',
                                 fontSize: '1em',
@@ -75,24 +79,24 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
                                 '&':'hover {color: #135;}'}}
                               >{book.title}
                         </Link>
-                    </CardHeading>
-                </CardHeader>
-                <Box textAlign="left" style={{padding:"3px"}}>
-                    <p>Written By: {book.author}</p>
-                    <p>Published {book.published_date}</p>
-                    <p>Genres: {book.subject}</p>
-                    <p>{read_status === "Have read"? <StarRatingEdit userRating={rating} onRatingChange={onRatingChange} /> : "" }</p>
+                    </Typography>
                 </Box>
-                <Box textAlign="center">
+                <Box textAlign="left" style={{padding:"3px"}}>
+                    <Typography>Written By: {book.author}</Typography>
+                    <Typography>Published: {book.published_date}</Typography>
+                    <Typography>Genres: {book.subject}</Typography>
+                    <Typography textAlign='center'>{read_status === "Have read"? <StarRatingEdit userRating={rating} onRatingChange={onRatingChange} /> : "" }</Typography>
+                </Box>
+                <Box >
                     <Button 
-                        style={{fontSize:"10px", margin:"2px", maxWidth:"40%", minWidth:"40%"}}
+                        style={{fontSize:"10px", margin:"2px", width:"45%", height:'3em', float:'bottom', alignSelf: "end", }}
                         variant="outlined"
                         onClick={handleUpdateReadStatus}
                         >
                             {read_status === "Want to read"? "Mark Read" : "Mark Unread"}
                     </Button>
                     <Button
-                        style={{fontSize:"10px",margin:"2px", maxWidth:"40%", minWidth:"40%"}}
+                        style={{fontSize:"10px",margin:"2px", width:"45%", height:'3em', alignSelf: "end", }}
                         variant="outlined"
                         onClick={handleRemoveFromList}
                         >

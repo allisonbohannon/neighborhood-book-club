@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { DetailCard, Container, CardHeader, CardHeading, CardBody, CardButton } from '../styles';
+import { Container, CardHeader, CardHeading, CardBody, CardButton } from '../styles';
 import { Button, Card } from '@mui/material';
 import StarRatingShow from '../components/StarRatingShow';
 import StarRatingEdit from '../components/StarRatingEdit';

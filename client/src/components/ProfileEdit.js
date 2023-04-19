@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../context/User'; 
-import { Button, FormControl, TextField, Typography,} from '@mui/material';
+import { Box, Button, FormControl, TextField, Typography,} from '@mui/material';
 import { Error } from '../styles';
 
 
@@ -13,7 +13,8 @@ const ProfileEdit = ({onUpdateUser, updateEdit}) => {
         first_name: currentUser.first_name, 
         last_name: currentUser.last_name, 
         zipcode: currentUser.zipcode, 
-        bio: currentUser.bio
+        bio: currentUser.bio,
+        password: currentUser.password_digest
     })
     const [errors, setErrors] = useState([])
 
@@ -50,52 +51,62 @@ const ProfileEdit = ({onUpdateUser, updateEdit}) => {
             })
     }
   return (
-    <div>
+    <Box >
         <Typography gutterBottom variant="h5" >My Info: </Typography>
         <form onSubmit={handleSubmit}>
                 <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'1em'}}
+                        sx={{margin:'2em', padding:'1em'}}
                         label="username"
                         name="username"
                         value={profileData.username}
                         onChange={handleChange}
                         >
                     </TextField>
+                  </FormControl>
+                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'1em'}}
+                        sx={{margin:'2em'}}
                         label="first name"
                         name="first_name"
                         value={profileData.first_name}
                         onChange={handleChange}
                         >
                     </TextField>
+                  </FormControl>
+                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'1em'}}
+                        sx={{margin:'2em'}}
                         label="last name"
                         name="last_name"
                         value={profileData.last_name}
                         onChange={handleChange}
                         >
                     </TextField>
+                  </FormControl>
+                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'1em'}}
+                        sx={{margin:'2em'}}
                         label="email"
                         name="email"
                         value={profileData.email}
                         onChange={handleChange}
                         >
                     </TextField>
+                  </FormControl>
+                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'1em'}}
+                        sx={{margin:'2em'}}
                         label="zipcode"
                         name="zipcode"
                         value={profileData.zipcode}
                         onChange={handleChange}
                         >
                     </TextField>
+                  </FormControl>
+                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'1em'}}
+                        sx={{margin:'2em'}}
                         label="bio"
                         name="bio"
                         value={profileData.bio}
@@ -111,7 +122,7 @@ const ProfileEdit = ({onUpdateUser, updateEdit}) => {
             <Button type="submit" sx={{float:'right'}}>update</Button>
         </form>
         
-    </div>
+    </Box>
   )
 }
 

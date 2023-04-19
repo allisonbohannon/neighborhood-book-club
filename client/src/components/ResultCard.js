@@ -73,7 +73,7 @@ const ResultCard = ({result, onAddBook}) => {
 
   return (
     <CardActionArea onClick={handleClick} sx={{ width:"50%", height:"15em", margin:'1px', }}>
-        <Card variant='outlined' sx={{display: 'flex'}}>
+        <Card variant='outlined' sx={{display: 'flex', width:'100%', height:'15em'}}>
             <Box sx={{display:'block', alignSelf:'center', margin:'1em'}}>
                 <CardMedia component="img"
                         image={url} 

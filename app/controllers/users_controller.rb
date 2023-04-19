@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
   # GET /users
   def index
@@ -18,8 +20,13 @@ class UsersController < ApplicationController
 
   def update
     user = find_user
-    user.update(user_params)
-    render json: user, include: ['reading_lists', 'reading_lists.book']
+    user.update!(user_params)
+    render json: user
+  end
+
+  def me
+      user = find_user_by_session
+      render json: user, include: ['reading_lists', 'reading_lists.book']
   end
 
   def show 
@@ -36,13 +43,25 @@ class UsersController < ApplicationController
 
 private 
 
-  def find_user
+  def find_user_by_session
       User.find_by(id: session[:user_id])
+  end
+
+  def find_user 
+    User.find(params[:id])
   end
 
     # Only allow a list of trusted parameters through.
   def user_params
-    params.permit(:username, :first_name, :last_name, :email, :password, :password_confirmation, :bio, :zipcode)
+    params.require(:user).permit(:id, :username, :first_name, :last_name, :email, :password, :password_confirmation, :bio, :zipcode, users_attributes: [:id, :username, :first_name, :last_name, :email, :password, :password_confirmation, :bio, :zipcode])
+  end
+
+  def render_not_found_response
+    render json: { error: "Camper not found" }, status: :not_found
+  end
+
+  def render_unprocessable_entity_response(exception)
+    render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
   end
 
 end

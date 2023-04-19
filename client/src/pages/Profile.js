@@ -17,7 +17,7 @@ const Profile = ({onUpdateUser}) => {
 
     return (
     <Container>
-            {edit === true? <ProfileData setEdit={setEdit} updateEdit={updateEdit} /> : <ProfileEdit onUpdateUser={onUpdateUser} setEdit={setEdit} updateEdit={updateEdit}/>}
+            {edit === false? <ProfileData setEdit={setEdit} updateEdit={updateEdit} /> : <ProfileEdit onUpdateUser={onUpdateUser} setEdit={setEdit} updateEdit={updateEdit}/>}
     </Container>
     )
 

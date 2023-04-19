@@ -10,6 +10,8 @@ import BookClubMembersPage from "../pages/BookClubMembersPage";
 import MyBooks from "../pages/MyBooks";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import Profile from "../pages/Profile";
+import ProfileEdit from "./ProfileEdit";
 import { UserContext } from "../context/User";
 
 
@@ -154,6 +156,9 @@ function App() {
                 />}/>
                 <Route path="/users/:id" element={<Users
                    users={users}
+                />} />
+                <Route path="/profile" element={<Profile
+                    onUpdateUser={onUpdateUser}
                 />} />
                 <Route path="/login" element={<Login
                 />} />

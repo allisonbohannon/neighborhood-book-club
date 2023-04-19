@@ -1,17 +1,12 @@
 import React from "react";
-import Star from "../styles/Star";
+import { Rating } from "@mui/material";
 
 
 function StarRatingShow({ rating }) {
 
   return (
     <span>
-      {[1, 2, 3, 4, 5].map((value) => (
-        <Star
-          key={value}
-          filled={value <= rating}
-        />
-      ))}
+      <Rating name="disabled" value={rating} disabled />
     </span>
   );
 }

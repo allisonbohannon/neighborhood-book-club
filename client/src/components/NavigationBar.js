@@ -57,7 +57,7 @@ const NavigationBar = ({searchTerm, setSearchTerm, setSearchActive, setSearchRes
             if (r.ok) {
               setCurrentUser(null)
               setAnchorElUser(null)
-              navigate(`/login`);
+              navigate(`/`);
             } else {
                 console.log("Unable to log out")
             }

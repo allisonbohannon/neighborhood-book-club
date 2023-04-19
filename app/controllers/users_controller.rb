@@ -9,12 +9,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
+    user = User.create!(user_params)
     if user.valid?
       session[:user_id] = user.id
       render json: user, status: :created
-    else
-      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+      puts user.errors
     end
   end
 
@@ -53,7 +52,7 @@ private
 
     # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:id, :username, :first_name, :last_name, :email, :password, :password_confirmation, :bio, :zipcode, users_attributes: [:id, :username, :first_name, :last_name, :email, :password, :password_confirmation, :bio, :zipcode])
+    params.permit(:id, :username, :first_name, :last_name, :email, :password, :password_confirmation, :bio, :zipcode, users_attributes: [:id, :username, :first_name, :last_name, :email, :password, :password_confirmation, :bio, :zipcode])
   end
 
   def render_not_found_response

@@ -11,8 +11,8 @@ class User < ApplicationRecord
     validates :username, :email, :zipcode, presence: true
     validates :username, uniqueness: { message: "%{value} is already taken"}
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
-    validates :password, length: { minimum: 8 }
+    validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false, message: "There is already an account associated with this email"}
+    validates :password, length: { minimum: 8 }, if: :password_digest_changed?
     validates :zipcode, length: { is: 5 }
     validates :bio, length: { maximum: 500, 
          too_long: "%{count} characters is the maximum allowed"}

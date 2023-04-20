@@ -56,65 +56,57 @@ const ProfileEdit = ({onUpdateUser, updateEdit}) => {
         <form onSubmit={handleSubmit}>
                 <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'2em'}}
+                        style={{margin:'1em'}}
                         label="username"
                         name="username"
                         value={profileData.username}
                         onChange={handleChange}
                         >
                     </TextField>
-                  </FormControl>
-                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'2em'}}
+                        style={{margin:'1em'}}
                         label="first name"
                         name="first_name"
                         value={profileData.first_name}
                         onChange={handleChange}
                         >
                     </TextField>
-                  </FormControl>
-                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'2em'}}
+                        style={{margin:'1em'}}
                         label="last name"
                         name="last_name"
                         value={profileData.last_name}
                         onChange={handleChange}
                         >
                     </TextField>
-                  </FormControl>
-                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'2em'}}
+                        style={{margin:'1em'}}
                         label="email"
                         name="email"
                         value={profileData.email}
                         onChange={handleChange}
                         >
                     </TextField>
-                  </FormControl>
-                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'2em'}}
+                        style={{margin:'1em'}}
                         label="zipcode"
                         name="zipcode"
                         value={profileData.zipcode}
                         onChange={handleChange}
                         >
                     </TextField>
-                  </FormControl>
-                  <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'2em'}}
+                        style={{margin:'1em'}}
                         label="bio"
                         name="bio"
                         value={profileData.bio}
                         onChange={handleChange}
+                        multiline
+                        rows={4}
                         >
                     </TextField>
             </FormControl>
-            <FormControl>
+            <FormControl   style={{margin:'1em', padding:'1em'}} >
             {errors.map((err) => (
               <Error key={err}>{err}</Error>
             ))}

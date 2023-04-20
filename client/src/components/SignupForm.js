@@ -55,6 +55,7 @@ function SignUpForm({onAddUser}) {
         <form onSubmit={handleSubmit}>
         <FormControl  fullWidth >
           <TextField
+            style={{margin:'1em'}}
             type="text"
             label="username"
             id="username"
@@ -66,6 +67,7 @@ function SignUpForm({onAddUser}) {
         </FormControl>
         <FormControl fullWidth>
           <TextField
+            style={{margin:'1em'}}
             type="text"
             label="email"
             id="email"
@@ -76,6 +78,7 @@ function SignUpForm({onAddUser}) {
         </FormControl>
         <FormControl fullWidth>
           <TextField
+            style={{margin:'1em'}}
             type="text"
             label="zipcode"
             id="zipcode"
@@ -86,6 +89,7 @@ function SignUpForm({onAddUser}) {
         </FormControl>
         <FormControl fullWidth>
           <TextField
+            style={{margin:'1em'}}
             type="password"
             label="password"
             id="password"
@@ -96,6 +100,7 @@ function SignUpForm({onAddUser}) {
         </FormControl>
         <FormControl fullWidth>
           <TextField
+            style={{margin:'1em'}}
             type="password"
             label="confirm password"
             id="password_confirmation"

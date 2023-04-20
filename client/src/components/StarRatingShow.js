@@ -6,7 +6,7 @@ function StarRatingShow({ rating }) {
 
   return (
     <span>
-      <Rating name="disabled" value={rating} disabled />
+      <Rating name="read-only" value={rating}  precision={0.5} readOnly/>
     </span>
   );
 }

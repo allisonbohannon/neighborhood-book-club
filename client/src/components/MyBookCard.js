@@ -1,8 +1,9 @@
 import React, {useContext, useState} from 'react'
 import { Link } from 'react-router-dom';
 import { Button, Card, CardMedia, Box, Typography } from '@mui/material';
-import { UserContext } from '../context/User'
-import StarRatingEdit from './StarRatingEdit'
+import { UserContext } from '../context/User';
+import StarRatingEdit from './StarRatingEdit'; 
+import StarRatingShow from './StarRatingShow';
 
 const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
 
@@ -41,19 +42,6 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
                 setReadStatus(null)})
         };
 
-    const onRatingChange = (newRating) => {
-        fetch(`/reading_lists/${id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({rating: newRating}),
-            }).then(r => r.json())
-            .then(data => console.log(data))
-
-        onUpdateBook(book.id)
-    } 
-
   return (
         <Card variant='outlined' sx={{display:"inline-flex", margin:"10px", padding:'.5em',minWidth:"100%", maxWidth:"100%", height:'20em', margin:'1px'}}>
              <Box sx={{display:'block', alignSelf:'center', margin:'1em', minWidth:'40%', maxWidth:'40%', padding:'1em'}}>
@@ -84,7 +72,16 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
                     <Typography>Written By: {book.author}</Typography>
                     <Typography>Published: {book.published_date}</Typography>
                     <Typography>Genres: {book.subject}</Typography>
-                    <Typography textAlign='center'>{read_status === "Have read"? <StarRatingEdit userRating={rating} onRatingChange={onRatingChange} /> : "" }</Typography>
+                    <Box sx={{display:'flex'}}>
+                        <Typography >Rating: </Typography>
+                        <StarRatingShow rating={book.average_rating} />
+                        <Typography>({book.total_ratings})</Typography>
+                    </Box>
+                    
+                    <Box sx={{display:'flex'}}>
+                        <Typography >{readStatus === "Have read"? "My Rating: " : ""}</Typography>
+                        {readStatus === "Have read"? <StarRatingEdit userBook={item} onUpdateBook={onUpdateBook} onUpdateUser={onUpdateUser} /> : "" }
+                    </Box>
                 </Box>
                 <Box >
                     <Button 
@@ -92,7 +89,7 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
                         variant="outlined"
                         onClick={handleUpdateReadStatus}
                         >
-                            {read_status === "Want to read"? "Mark Read" : "Mark Unread"}
+                            {readStatus === "Want to read"? "Mark Read" : "Mark Unread"}
                     </Button>
                     <Button
                         style={{fontSize:"10px",margin:"2px", width:"45%", height:'3em', alignSelf: "end", }}

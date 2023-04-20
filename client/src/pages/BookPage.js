@@ -105,13 +105,13 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
             </Box>
             <Box textAlign={'center'}>
                 <Box style={{width: "100%"}}>
-                  <Typography style={{fontSize:'2em', color:'#aaa', borderBottom: '1px solid #ddd', padding:'1em', }}>{displayBook.title}</Typography>
-                  <Typography style={{fontSize:'1.1em', color:'rgb(150,78,108)' }}> Written by: {displayBook.author}</Typography>
-                  <p style={{color:"#aaa", textAlign:"center", margin:"0px"}}>Published: {displayBook.published_date}</p>
-                  <p style={{color:"#aaa", textAlign:"center", margin:"0px"}}>Pages: {displayBook.pages}</p>
-                  <p style={{overflow:'none'}}>Genre: {displayBook.subject}</p>
-                  <p>Avg Rating: {displayAvgRating()} </p>
-                  <p>{readStatus === "read" ? displayUserRating() : '' }</p>
+                  <Typography style={{fontSize:'2em', color:'#aaa', borderBottom: '1px solid #ddd', padding:'.5em', }}>{displayBook.title}</Typography>
+                  <Typography style={{fontSize:'1.1em', padding:'.5em' }}> Written by: {displayBook.author}</Typography>
+                  <Typography style={{ textAlign:"center", margin:"0px"}}>Published: {displayBook.published_date}</Typography>
+                  <Typography style={{ textAlign:"center", margin:"0px"}}>Pages: {displayBook.pages}</Typography>
+                  <Typography style={{ textAlign:"center", margin:"0px", overflow:'none'}}>Genre: {displayBook.subject}</Typography>
+                  <Typography>Avg Rating: {displayAvgRating()} </Typography>
+                  <Typography>{readStatus === "read" ? displayUserRating() : '' }</Typography>
                 </Box> 
                 <Box textAlign="center">
                   <Button 

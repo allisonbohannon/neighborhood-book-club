@@ -8,19 +8,19 @@ function StarRatingEdit({userBook, onUpdateBook, onUpdateUser }) {
 
   const { currentUser } = useContext(UserContext);
 
-  const [rating, setRating] = useState(userBook.rating);
+  const [userRating, setUserRating] = useState(userBook.rating);
 
-  const handleRatingChange = () => {
+  const handleRatingChange = (e) => {
     fetch(`/reading_lists/${userBook.id}`, {
       method: "PATCH",
       headers: {
           "Content-Type": "application/json",
       },
-      body: JSON.stringify({rating: rating}),
+      body: JSON.stringify({rating: e.target.value}),
       }).then(r => r.json())
       .then(data => {
           onUpdateUser(currentUser.id)
-          onUpdateBook(userBook.book_id)
+          onUpdateBook(data.book.id)
       })
 
   }
@@ -29,11 +29,12 @@ function StarRatingEdit({userBook, onUpdateBook, onUpdateUser }) {
   
     <span>
          <Rating
-        name="simple-controlled"
-        value={userBook.rating}
+        name="size-medium"
+        value={userRating}
+        precision={0.5}
         onChange={(e) => {
-          setRating(e.target.value);
-          handleRatingChange()
+          setUserRating(e.target.value);
+          handleRatingChange(e)
         }}
       />
     </span>

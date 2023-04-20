@@ -3,11 +3,10 @@ import NewMessage from '../components/NewMessage';
 import { useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../context/User';
 import { Box } from '@mui/system';
-import { Paper, Card, Button, List, IconButton } from '@mui/material';
+import { Paper, Card, Button, List, IconButton, Typography } from '@mui/material';
 import { Container } from '../styles';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import MessageCard from '../components/MessageCard';
-
 
 const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
 
@@ -71,7 +70,7 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
     <Container >
       <Box style={{display:"flex", justifyContent:"space-around"}}>
         <Card variant="outlined">
-          <p>{displayClub.book.title}</p>
+          <Typography>{displayClub.book.title}</Typography>
         </Card>
         <Box textAlign={'center'}>
           <Button onClick={() => {navigate(`/bookclubs/${bookClubId}/members`)}}>View Members ({displayClub.total_members})</Button>

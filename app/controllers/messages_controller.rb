@@ -36,6 +36,7 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   def destroy
     @message.destroy
+    render json: {}
   end
 
   private

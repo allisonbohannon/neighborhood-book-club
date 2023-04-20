@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, FormControl, TextField } from '@mui/material';
+import { Box, Button, FormControl, TextField } from '@mui/material';
 
 const NewMessage = ({memberId, clubId, onUpdateBookClub, setShowInput}) => {
 
@@ -26,12 +26,16 @@ const NewMessage = ({memberId, clubId, onUpdateBookClub, setShowInput}) => {
   return (
     <form onSubmit={handleSubmit} >
         <FormControl fullWidth >
-            <TextField value={content} onChange={(e) => setContent(e.target.value)} />
+            <TextField value={content} 
+                        multiline
+                        rows={4} 
+                        onChange={(e) => setContent(e.target.value)} 
+                        />
         </FormControl>
-        <Button style={{float:"right"}}
-            type="submit"
-            >
-            Submit
+            <Button  
+                type="submit"
+                >
+                Submit
             </Button>
     </form>
 

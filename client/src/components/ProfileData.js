@@ -1,15 +1,15 @@
-import React, { useContext} from 'react'
+import React, { useContext, useState} from 'react'
 import { UserContext } from '../context/User';
 import { IconButton, Card, Typography,} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
-const ProfileData = ({updateEdit}) => {
+const ProfileData = ({setEdit}) => {
 
 const { currentUser } = useContext(UserContext);
 
   return (
     <Card sx={{ padding:"3em"}}>
-            <IconButton sx={{float:'right'}} onClick={() => updateEdit()}>
+            <IconButton sx={{float:'right'}} onClick={() => setEdit(true)}>
                 <EditIcon />
             </IconButton>
             <Typography gutterBottom variant="h5" >My Info: </Typography>

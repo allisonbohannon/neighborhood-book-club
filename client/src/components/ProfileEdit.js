@@ -4,7 +4,7 @@ import { Box, Button, FormControl, TextField, Typography,} from '@mui/material';
 import { Error } from '../styles';
 
 
-const ProfileEdit = ({onUpdateUser, updateEdit}) => {
+const ProfileEdit = ({onUpdateUser, setEdit}) => {
 
     const { currentUser } = useContext(UserContext); 
 
@@ -39,7 +39,7 @@ const ProfileEdit = ({onUpdateUser, updateEdit}) => {
             }).then(r => {
                 if (r.ok) {
                   r.json().then((user) => {
-                    updateEdit();
+                    setEdit(false);
                     onUpdateUser(user.id);
                     
                   });

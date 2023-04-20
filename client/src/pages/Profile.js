@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react'
-import { UserContext } from '../context/User'; 
+import React, { useState } from 'react'
 import { Container } from '../styles';
 import ProfileData from '../components/ProfileData';
 import ProfileEdit from '../components/ProfileEdit';
@@ -7,13 +6,7 @@ import ProfileEdit from '../components/ProfileEdit';
 
 const Profile = ({onUpdateUser}) => {
 
-    const { currentUser } = useContext(UserContext); 
     const [edit, setEdit] = useState(false)
-
-    const updateEdit = () => {
-        setEdit(!edit)
-    }
-   
 
     return (
     <Container>

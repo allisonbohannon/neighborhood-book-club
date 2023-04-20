@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ResultCard from '../components/ResultCard';
-import { Container, Error } from '../styles'
-import { FormControl, TextField, Button, Typography} from '@mui/material';
+import { Container} from '../styles';
+
 
 
 const Books = ({onAddBook, searchTerm, searchActive, searchResults}) => {

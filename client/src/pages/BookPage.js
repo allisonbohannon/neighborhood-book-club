@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Container, CardHeader, CardHeading, CardBody, CardButton } from '../styles';
-import { Button, Card } from '@mui/material';
+import { Container } from '../styles';
+import { Button, Card, CardMedia, Typography } from '@mui/material';
 import StarRatingShow from '../components/StarRatingShow';
 import StarRatingEdit from '../components/StarRatingEdit';
 import { UserContext } from '../context/User';
@@ -109,11 +109,11 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
       <Button onClick={handleClick}>Back to Search</Button>
       <br></br>
         <Card variant="outlined">
-          <CardHeader style={{justifyContent:"space-around"}}>
+          <CardMedia style={{justifyContent:"space-around"}}>
               <img src={displayBook.cover_url} alt={displayBook.title} />
               <div style={{width: "40%"}}>
-                <CardHeading style={{fontSize:'2em', color:'#aaa', borderBottom: '1px solid #ddd', padding:'1em', }}>{displayBook.title}</CardHeading>
-                <CardHeading style={{fontSize:'1.1em', color:'rgb(150,78,108)' }}> Written by: {displayBook.author}</CardHeading>
+                <Typography style={{fontSize:'2em', color:'#aaa', borderBottom: '1px solid #ddd', padding:'1em', }}>{displayBook.title}</Typography>
+                <Typography style={{fontSize:'1.1em', color:'rgb(150,78,108)' }}> Written by: {displayBook.author}</Typography>
                 <p style={{color:"#aaa", textAlign:"center", margin:"0px"}}>Published: {displayBook.published_date}</p>
                 <p style={{color:"#aaa", textAlign:"center", margin:"0px"}}>Pages: {displayBook.pages}</p>
                 <p style={{overflow:'none'}}>Genre: {displayBook.subject}</p>
@@ -121,7 +121,7 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
                 <p>{readStatus === "read" ? displayUserRating() : '' }</p>
               </div> 
              
-          </CardHeader>
+          </CardMedia>
             <Box textAlign="center">
               <Button 
                   value="Have read"

@@ -1,8 +1,7 @@
 import React, {useContext} from 'react'
-import { Box, Paper, Grid, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import { Container } from '../styles'
 import { UserContext } from '../context/User'
-import { textAlign } from '@mui/system'
 import MyBookCard from '../components/MyBookCard'
 
 const MyBooks = ({onUpdateUser, onUpdateBook}) => {

@@ -56,7 +56,7 @@ const ProfileEdit = ({onUpdateUser, updateEdit}) => {
         <form onSubmit={handleSubmit}>
                 <FormControl fullWidth>
                     <TextField 
-                        sx={{margin:'2em', padding:'1em'}}
+                        sx={{margin:'2em'}}
                         label="username"
                         name="username"
                         value={profileData.username}

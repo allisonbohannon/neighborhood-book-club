@@ -1,6 +1,6 @@
 import React from 'react'
 import UserCard from '../components/UserCard'
-import { CardContainer } from '../styles'
+import { Container } from '../styles'
 
 const Users = ({users, wineries, visits, comments}) => {
 
@@ -10,7 +10,7 @@ const Users = ({users, wineries, visits, comments}) => {
 })
 
   return (
-    <CardContainer>{displayUsers}</CardContainer>
+    <Container>{displayUsers}</Container>
   )
 }
 

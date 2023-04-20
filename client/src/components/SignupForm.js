@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
-import { CardButton, Error, Input, FormField, Label, Container } from "../styles";
+import { Error, Container } from "../styles";
 import { UserContext } from "../context/User";
 import { useNavigate } from "react-router-dom";
+import { FormControl, TextField, Button} from "@mui/material";
+
 
 function SignUpForm({onAddUser}) {
 
@@ -18,10 +20,6 @@ function SignUpForm({onAddUser}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log({username,
-      email,
-      zipcode})
-
     setErrors([]);
     setIsLoading(true);
     fetch("/signup", {
@@ -46,7 +44,6 @@ function SignUpForm({onAddUser}) {
           ;
       } else {
         r.json().then((err) => {
-          console.log(err.errors)
           setErrors(err.errors)
         });
       }
@@ -54,67 +51,65 @@ function SignUpForm({onAddUser}) {
   }
 
   return (
-    <Container style={{width:"40em", }}>
+    <Container style={{width:"40em", display:'flex', justifyContent:'center', }}>
         <form onSubmit={handleSubmit}>
-        <FormField>
-          <Label htmlFor="username">Username</Label>
-          <Input
+        <FormControl  fullWidth >
+          <TextField
             type="text"
+            label="username"
             id="username"
             autoComplete="off"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            
           />
-        </FormField>
-        <FormField>
-          <Label htmlFor="email">e-mail address</Label>
-          <Input
+        </FormControl>
+        <FormControl fullWidth>
+          <TextField
             type="text"
+            label="email"
             id="email"
             autoComplete="off"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </FormField>
-        <FormField>
-          <Label htmlFor="zipcode">Zipcode</Label>
-          <Input
+        </FormControl>
+        <FormControl fullWidth>
+          <TextField
             type="text"
+            label="zipcode"
             id="zipcode"
             autoComplete="off"
             value={zipcode}
             onChange={(e) => setZipcode(e.target.value)}
           />
-        </FormField>
-        <FormField>
-          <Label htmlFor="password">Password</Label>
-          <Input
+        </FormControl>
+        <FormControl fullWidth>
+          <TextField
             type="password"
+            label="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
           />
-        </FormField>
-        <FormField>
-          <Label htmlFor="password">Password Confirmation</Label>
-          <Input
+        </FormControl>
+        <FormControl fullWidth>
+          <TextField
             type="password"
+            label="confirm password"
             id="password_confirmation"
             value={passwordConfirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
             autoComplete="current-password"
           />
-        </FormField>
-        
-        <FormField>
-          <CardButton type="submit">{isLoading ? "Loading..." : "Sign Up"}</CardButton>
-        </FormField>
-        <FormField>
+        </FormControl>
+          <Button type="submit" sx={{float:'right'}}>{isLoading ? "Loading..." : "Sign Up"}</Button>
+        <FormControl>
           {errors.map((err) => (
             <Error key={err}>{err}</Error>
           ))}
-        </FormField>
+        </FormControl>
       </form>
     </Container>
     

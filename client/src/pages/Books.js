@@ -4,7 +4,7 @@ import { Container} from '../styles';
 
 
 
-const Books = ({onAddBook, searchTerm, searchActive, searchResults}) => {
+const Books = ({onAddBook, searchActive, searchResults}) => {
 
     let displayResults; 
     if (searchActive === true && searchResults.length == 0) {

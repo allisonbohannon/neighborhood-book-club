@@ -63,7 +63,7 @@ const ResultCard = ({result, onAddBook}) => {
         subject = result.subject
     } else {
         const maxThree = Math.min(3, result.subject.length)
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < maxThree; i++) {
             subject = subject.concat(result.subject[i], ',')
          }
     }

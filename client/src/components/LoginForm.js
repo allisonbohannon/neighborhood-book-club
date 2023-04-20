@@ -35,7 +35,6 @@ const LoginForm = () => {
           });
         } else {
           r.json().then((err) => {
-            console.log(err)
             setError(err.error.login)});
         }
       });

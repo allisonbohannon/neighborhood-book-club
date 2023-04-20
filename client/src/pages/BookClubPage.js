@@ -5,10 +5,11 @@ import { UserContext } from '../context/User';
 import { Box } from '@mui/system';
 import { Paper, Card, Button, List, IconButton, Typography } from '@mui/material';
 import { Container } from '../styles';
+import MyBookCard from '../components/MyBookCard';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import MessageCard from '../components/MessageCard';
 
-const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
+const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser, onUpdateBook }) => {
 
   const { bookClubId } = useParams();
   const { currentUser } = useContext(UserContext); 
@@ -18,8 +19,16 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
 
   const displayClub = bookClubs.find(club => club.id === parseInt(bookClubId));
 
-  const userMember = displayClub.book_club_members.find(member => member.user.id === currentUser.id); 
-  const [ userMemberStatus, setUserMemberStatus ] = useState(userMember.status)
+  let userMember = null; 
+  if (displayClub.book_club_members.find(member => member.user.id === currentUser.id)) {
+    userMember = displayClub.book_club_members.find(member => member.user.id === currentUser.id); 
+  }
+  const [ userMemberStatus, setUserMemberStatus ] = useState((userMember) => userMember? userMember.status : null)
+
+  let userBook = null;
+  if (currentUser.reading_lists.length >= 1) {
+     userBook = currentUser.reading_lists.find(item => item.book_id === displayClub.book.id)
+  };
 
   const handleUpdateMembership = () => {
     if ( userMember ) {
@@ -69,9 +78,10 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
   return (
     <Container >
       <Box style={{display:"flex", justifyContent:"space-around"}}>
-        <Card variant="outlined">
-          <Typography>{displayClub.book.title}</Typography>
-        </Card>
+        <Box sx={{width:'40%'}}>
+            <MyBookCard item={userBook} onUpdateUser={onUpdateUser} onUpdateBook={onUpdateBook}/>
+        </Box>
+       
         <Box textAlign={'center'}>
           <Button onClick={() => {navigate(`/bookclubs/${bookClubId}/members`)}}>View Members ({displayClub.total_members})</Button>
           <Button onClick={handleUpdateMembership}>{userMemberStatus === "Active"? "Leave Club" :"Join Club"}</Button>

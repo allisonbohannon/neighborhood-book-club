@@ -138,11 +138,13 @@ function App() {
                   bookClubs={bookClubs}
                   onUpdateBookClub={onUpdateBookClub}
                   onUpdateUser={onUpdateUser}
+                  onUpdateBook={onUpdateBook}
                 />}/>
                   <Route path="/bookclubs/:bookClubId" element={<BookClubPage
                   bookClubs={bookClubs}
                   onUpdateBookClub={onUpdateBookClub}
                   onUpdateUser={onUpdateUser}
+                  onUpdateBook={onUpdateBook}
                 />}/>
                 <Route path="/bookclubs/:bookClubId/members" element={<BookClubMembersPage
                   bookClubs={bookClubs}

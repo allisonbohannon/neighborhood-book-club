@@ -17,7 +17,7 @@ const MessageCard = ({ member, message, admin, clubId, onUpdateBookClub }) => {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
         })
-        .then(r => console.log(r))
+        .then(r => r.json())
         .then(data => onUpdateBookClub(clubId))
     }
 

@@ -9,13 +9,13 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
 
     const { currentUser } = useContext(UserContext)
 
-    const {id, rating, read_status, book } = item
+    const {id, read_status, book } = item
 
     const [readStatus, setReadStatus] = useState(read_status)
   
     const handleUpdateReadStatus = () => {
         let newStatus;
-        if (read_status === "Want to read") {
+        if (readStatus === "Want to read") {
             newStatus = "Have read";
         } else {
             newStatus = "Want to read";
@@ -27,8 +27,11 @@ const MyBookCard = ({item, onUpdateUser, onUpdateBook}) => {
             },
             body: JSON.stringify({read_status: newStatus}),
             }).then(r => r.json())
-            .then(data => setReadStatus(newStatus))
-            .then(onUpdateUser(currentUser.id))
+            .then(data => {
+                setReadStatus(data.read_status)
+                onUpdateUser(currentUser.id)
+            })
+                
         };
         
     const handleRemoveFromList = () => {

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /users
   def index
     users = User.all
-    render json: users, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
+    render json: users, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following', 'book_club_members', 'book_club_members.book_club' ]
   end
 
   def create
@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     if user.valid?
       session[:user_id] = user.id
       render json: user, status: :created
-      puts user.errors
     end
   end
 
@@ -25,12 +24,12 @@ class UsersController < ApplicationController
 
   def me
       user = find_user_by_session
-      render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
+      render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following', 'book_club_members', 'book_club_members.book_club' ]
   end
 
   def show 
       user = find_user
-      render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
+      render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following', 'book_club_members', 'book_club_members.book_club' ]
   end
 
   def destroy
@@ -43,14 +42,14 @@ class UsersController < ApplicationController
     current_user = find_user_by_session
     user = find_user
     Relationship.create(follower_id: current_user.id , following_id: user.id )
-    render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
+    render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following', 'book_club_members', 'book_club_members.book_club' ]
   end
   
   def unfollow
     current_user = find_user_by_session
     user = find_user
     Relationship.find_by(follower_id: current_user.id, following_id: user.id).destroy
-    render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
+    render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following', 'book_club_members', 'book_club_members.book_club' ]
   end
 
   # def following

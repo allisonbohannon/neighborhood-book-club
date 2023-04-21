@@ -25,12 +25,12 @@ class UsersController < ApplicationController
 
   def me
       user = find_user_by_session
-      render json: user, include: ['reading_lists', 'reading_lists.book']
+      render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
   end
 
   def show 
       user = find_user
-      render json: user, include: ['reading_lists', 'reading_lists.book']
+      render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
   end
 
   def destroy
@@ -43,14 +43,14 @@ class UsersController < ApplicationController
     current_user = find_user_by_session
     user = find_user
     Relationship.create(follower_id: current_user.id , following_id: user.id )
-    render json: user
+    render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
   end
   
   def unfollow
     current_user = find_user_by_session
     user = find_user
     Relationship.find_by(follower_id: current_user.id, following_id: user.id).destroy
-    render json: user
+    render json: user, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
   end
 
   # def following

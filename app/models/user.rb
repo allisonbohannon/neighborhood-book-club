@@ -32,6 +32,11 @@ class User < ApplicationRecord
     end
     
     def following_count
-        self.following.count
+        self.followings.count
+    end
+
+    def books_read 
+        read_books = self.reading_lists.select {|item| item.read_status == 'Have read'}
+        read_books.count 
     end
 end

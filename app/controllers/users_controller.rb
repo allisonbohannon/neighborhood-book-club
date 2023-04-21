@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /users
   def index
     users = User.all
-    render json: users, include: ['reading_lists', 'reading_lists.book']
+    render json: users, include: ['reading_lists', 'reading_lists.book', 'following_relationships', 'following_relationships.follower', 'follower_relationships', 'follower_relationships.following' ]
   end
 
   def create
@@ -38,6 +38,34 @@ class UsersController < ApplicationController
       user.destroy
       head :no_content
   end
+
+  def follow
+    current_user = find_user_by_session
+    user = find_user
+    Relationship.create(follower_id: current_user.id , following_id: user.id )
+    render json: user
+  end
+  
+  def unfollow
+    current_user = find_user_by_session
+    user = find_user
+    Relationship.find_by(follower_id: current_user.id, following_id: user.id).destroy
+    render json: user
+  end
+
+  # def following
+  #   @title = "Following"
+  #   @user  = User.find(params[:id])
+  #   @users = @user.following.paginate(page: params[:page])
+  #   render 'show_follow'
+  # end
+
+  # def followers
+  #   @title = "Followers"
+  #   @user  = User.find(params[:id])
+  #   @users = @user.followers.paginate(page: params[:page])
+  #   render 'show_follow'
+  # end
 
 
 private 

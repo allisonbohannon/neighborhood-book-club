@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+  resources :relationships
   resources :messages
   resources :book_club_members
   resources :book_clubs
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   get "/me", to: "users#me"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  post '/users/:id/follow', to: "users#follow", as: "follow_user"
+  post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"
 
   
   # Routing logic: fallback requests for React Router.

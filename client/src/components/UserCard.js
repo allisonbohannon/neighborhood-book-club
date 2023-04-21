@@ -20,9 +20,7 @@ const UserCard = ({user}) => {
                     <Icon>
                         <PeopleIcon />
                     </Icon>
-
                 </Box>
-                
                 <Typography variant="body2" color="text.secondary">
                     {user.bio}
                 </Typography>

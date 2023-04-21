@@ -12,6 +12,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
 import { UserContext } from "../context/User";
+import MyBookClubs from "./MyBookClubs";
 
 
 function App() {
@@ -134,12 +135,6 @@ function App() {
                   onUpdateBook={onUpdateBook}
                   onAddBookClub={onAddBookClub}
                 />}/>
-                 <Route path="/books/:bookId/bookclubs/:bookClubId" element={<BookClubPage
-                  bookClubs={bookClubs}
-                  onUpdateBookClub={onUpdateBookClub}
-                  onUpdateUser={onUpdateUser}
-                  onUpdateBook={onUpdateBook}
-                />}/>
                   <Route path="/bookclubs/:bookClubId" element={<BookClubPage
                   bookClubs={bookClubs}
                   onUpdateBookClub={onUpdateBookClub}
@@ -155,6 +150,12 @@ function App() {
                     onUpdateUser={onUpdateUser}
                     onUpdateBook={onUpdateBook}
                 />}/>
+                 <Route path="/mybookclubs" element={<MyBookClubs
+                    bookClubs={bookClubs}
+                    users={users}
+                    onUpdateUser={onUpdateUser}
+                    onUpdateBookClub={onUpdateBookClub}
+                />}/> 
                 <Route path="/users/:id" element={<Users
                    users={users}
                 />} />

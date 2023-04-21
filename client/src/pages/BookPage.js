@@ -133,7 +133,7 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
         </Card>
       
       <Box textAlign="center" style={{margin:"1em"}}>
-        { localBookClub ? <BookClubCard club={localBookClub} /> : <Button onClick={handleAddBookClub} variant='outlined'>Start a book club!</Button>}
+        { localBookClub ? <BookClubCard club={localBookClub} book={displayBook}/> : <Button onClick={handleAddBookClub} variant='outlined'>Start a book club!</Button>}
       </Box>
      
 

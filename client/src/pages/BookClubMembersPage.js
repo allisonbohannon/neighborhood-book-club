@@ -5,7 +5,7 @@ import { Container } from '../styles';
 import UserCard from '../components/UserCard'
 
 
-const BookClubMembersPage = ({bookClubs}) => {
+const BookClubMembersPage = ({bookClubs, onUpdateUser}) => {
 
     const { bookClubId } = useParams(); 
     const { currentUser } = useContext(UserContext);
@@ -14,7 +14,7 @@ const BookClubMembersPage = ({bookClubs}) => {
 
     const displayMembers = displayClub.book_club_members.filter(member => member.user.user_id !== currentUser.id )
     .map((member) => { 
-        return <li key={member.id} style={{listStyle:"none"}}><UserCard user={member.user}/></li>
+        return <li key={member.id} style={{listStyle:"none"}}><UserCard user={member.user} onUpdateUser={onUpdateUser}/></li>
 
     });
 

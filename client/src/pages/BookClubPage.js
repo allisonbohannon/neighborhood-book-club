@@ -3,7 +3,7 @@ import NewMessage from '../components/NewMessage';
 import { useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../context/User';
 import { Box } from '@mui/system';
-import { Paper, Card, Button, List, IconButton, Typography } from '@mui/material';
+import { Paper, Button, List, IconButton, Typography } from '@mui/material';
 import { Container } from '../styles';
 import MyBookCard from '../components/MyBookCard';
 import AddCommentIcon from '@mui/icons-material/AddComment';

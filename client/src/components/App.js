@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import NavigationBar from "./NavigationBar";
 import Home from "../pages/Home";
 import Books from "../pages/Books";
-import Users from "../pages/Users";
+import UserPage from "../pages/UserPage";
 import BookPage from "../pages/BookPage";
 import BookClubPage from "../pages/BookClubPage";
 import BookClubMembersPage from "../pages/BookClubMembersPage";
@@ -143,29 +143,32 @@ function App() {
                 />}/>
                 <Route path="/bookclubs/:bookClubId/members" element={<BookClubMembersPage
                   bookClubs={bookClubs}
+                  onUpdateUser={onUpdateUser}
                 />}/>
                 <Route path="/mybooks" element={<MyBooks
-                    books={books}
-                    users={users}
-                    onUpdateUser={onUpdateUser}
-                    onUpdateBook={onUpdateBook}
+                  books={books}
+                  users={users}
+                  onUpdateUser={onUpdateUser}
+                  onUpdateBook={onUpdateBook}
                 />}/>
                  <Route path="/mybookclubs" element={<MyBookClubs
-                    bookClubs={bookClubs}
-                    users={users}
-                    onUpdateUser={onUpdateUser}
-                    onUpdateBookClub={onUpdateBookClub}
+                  bookClubs={bookClubs}
+                  users={users}
+                  onUpdateUser={onUpdateUser}
+                  onUpdateBookClub={onUpdateBookClub}
                 />}/> 
-                <Route path="/users/:id" element={<Users
-                   users={users}
+                <Route path="/users/:username" element={<UserPage
+                  users={users}
+                  onUpdateBook={onUpdateBook}
+                  onUpdateUser={onUpdateUser}
                 />} />
                 <Route path="/profile" element={<Profile
-                    onUpdateUser={onUpdateUser}
+                  onUpdateUser={onUpdateUser}
                 />} />
                 <Route path="/login" element={<Login
                 />} />
                 <Route path="/signup" element={<SignUp 
-                    onAddUser={onAddUser}
+                  onAddUser={onAddUser}
                 />} />
                 <Route path="/" element={<Home
                 />} />

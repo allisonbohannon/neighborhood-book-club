@@ -20,11 +20,14 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser, onUpdateBook 
   const displayClub = bookClubs.find(club => club.id === parseInt(bookClubId));
 
   let userMember = null; 
+  let userMemberStatusCheck = null; 
   if (displayClub.book_club_members.find(member => member.user.id === currentUser.id)) {
     userMember = displayClub.book_club_members.find(member => member.user.id === currentUser.id); 
+    userMemberStatusCheck = userMember.status; 
   }
-  const [ userMemberStatus, setUserMemberStatus ] = useState((userMember) => userMember? userMember.status : null)
 
+  const [ userMemberStatus, setUserMemberStatus ] = useState(userMemberStatusCheck)
+ 
   let userBook = null;
   if (currentUser.reading_lists.length >= 1) {
      userBook = currentUser.reading_lists.find(item => item.book_id === displayClub.book.id)

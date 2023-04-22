@@ -74,21 +74,29 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(bookClubObj),
-        }).then(r => r.json())
-        .then(data => { 
-          onAddBookClub(data)
-          fetch("/book_club_members", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              user_id: currentUser.id, 
-              book_id: displayBook.id,
-              book_club_id: data.id
-            }),
-          }).then(r => r.json())
-          navigate(`/bookclubs/${data.id}`)})
+      })
+      .then(r => r.json())
+      .then(data => {
+        console.log(data)
+        console.log({userBook})
+          if (!userBook) {
+            fetch("/reading_lists", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  user_id: currentUser.id,
+                  book_id: displayBook.id,
+                }),
+                }).then(r => r.json())
+                .then(data => {
+                  onUpdateUser(currentUser.id)
+                })
+            }; 
+            navigate(`/bookclubs/${data.id}`)
+          });
+      
   };
 
 

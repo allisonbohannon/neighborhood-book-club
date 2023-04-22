@@ -16,8 +16,10 @@ class BookClubsController < ApplicationController
   # POST /book_clubs
   def create
     @book_club = BookClub.new(book_club_params)
+    @user = User.find_by(id: session[:user_id])
 
     if @book_club.save
+      BookClubMember.create(book_club_id: @book_club.id, user_id: @user.id)
       render json: @book_club, status: :created, location: @book_club
     else
       render json: @book_club.errors, status: :unprocessable_entity

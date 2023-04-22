@@ -88,7 +88,7 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
               book_club_id: data.id
             }),
           }).then(r => r.json())
-          navigate(`bookclubs/${data.id}`)})
+          navigate(`/bookclubs/${data.id}`)})
   };
 
 

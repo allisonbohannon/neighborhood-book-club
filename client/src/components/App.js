@@ -8,11 +8,12 @@ import BookPage from "../pages/BookPage";
 import BookClubPage from "../pages/BookClubPage";
 import BookClubMembersPage from "../pages/BookClubMembersPage";
 import MyBooks from "../pages/MyBooks";
+import MyBookClubs from "../pages/MyBookClubs";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
 import { UserContext } from "../context/User";
-import MyBookClubs from "./MyBookClubs";
+
 
 
 function App() {

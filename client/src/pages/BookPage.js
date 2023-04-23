@@ -78,8 +78,8 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
       .then(r => r.json())
       .then(data => {
         console.log(data)
-        console.log({userBook})
-          if (!userBook) {
+        onAddBookClub(data)
+         if (!userBook) {
             fetch("/reading_lists", {
                 method: "POST",
                 headers: {

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../context/User'
-import BookClubCard from './BookClubCard'
+import BookClubCard from '../components/BookClubCard'
 import { Container } from '../styles'
 
 const MyBookClubs = ({bookClubs, users, onUpdateBookClub, onUpdateUser}) => {

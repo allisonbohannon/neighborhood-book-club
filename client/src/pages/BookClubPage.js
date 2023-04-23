@@ -18,7 +18,7 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser, onUpdateBook 
   const [showInput, setShowInput] = useState(false)
 
   const displayClub = bookClubs.find(club => club.id === parseInt(bookClubId));
-
+ 
   let userMember = null; 
   let userMemberStatusCheck = null; 
   if (displayClub.book_club_members.find(member => member.user.id === currentUser.id)) {
@@ -82,7 +82,8 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser, onUpdateBook 
     <Container >
       <Box sx={{display:"flex", justifyContent:"space-around", alignItems:'center'}}>
         <Box sx={{width:'40%'}}>
-            <MyBookCard item={userBook} onUpdateUser={onUpdateUser} onUpdateBook={onUpdateBook}/>
+            <Typography> Book club for </Typography>
+            <Typography variant="h5">{displayClub.book.title}</Typography>
         </Box>
        
         <Box textAlign={'center'} sx={{display:'flex', width:'40%'}}>

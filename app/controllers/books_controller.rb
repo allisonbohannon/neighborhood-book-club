@@ -36,6 +36,8 @@ class BooksController < ApplicationController
   # DELETE /books/1
   def destroy
     @book.destroy
+
+    render json: {}
   end
 
   private

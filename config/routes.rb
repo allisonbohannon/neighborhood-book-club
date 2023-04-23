@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
+
+  # Routing logic: fallback requests for React Router.
+  # Leave this here to help deploy your app later!
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
   
 
-  resources :relationships
-  resources :messages
-  resources :book_club_members
-  resources :book_clubs
-  resources :users 
-  resources :books
-  resources :reading_lists
+  resources :relationships, only: [:index, :show, :create, :destroy]
+  resources :messages, only: [:index, :show, :create, :destroy, :update]
+  resources :book_club_members, , only: [:index, :show, :create, :update]
+  resources :book_clubs, only: [:index, :show, :create, :update]
+  resources :users, only: [:index, :show, :create, :destroy, :update] 
+  resources :books, only: [:index, :show, :create, :update]
+  resources :reading_lists, only: [:index, :show, :create, :destroy, :update]
 
   post "/signup", to: "users#create"
   get "/me", to: "users#me"

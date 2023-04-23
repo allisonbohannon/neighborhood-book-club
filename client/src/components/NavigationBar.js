@@ -50,7 +50,7 @@ const NavigationBar = ({searchTerm, setSearchTerm, setSearchActive, setSearchRes
     const { setCurrentUser } = useContext(UserContext)
     const navigate = useNavigate()
 
-    const menuItems = [{title: 'Profile', url: '/profile'}, {title: 'My Books', url: '/mybooks'}, {title:'My BookClubs', url:'/mybookclubs'}];
+    const menuItems = [{title: 'Profile', url: '/~profile'}, {title: 'My Books', url: '/~mybooks'}, {title:'My BookClubs', url:'/~mybookclubs'}];
 
     const handleLogout = () =>{
         fetch("/logout", { method: "DELETE" }).then((r) => {

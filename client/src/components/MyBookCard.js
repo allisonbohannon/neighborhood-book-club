@@ -62,7 +62,7 @@ const MyBookCard = ({user, book, onUpdateUser, onUpdateBook}) => {
             <Box sx={{display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
                 <Box sx={{borderBottom:"1px solid lightgray"}}>
                     <Typography variant='h5'>
-                        <Link to={`/books/${book.id}`}
+                        <Link to={`/~books/${book.id}`}
                                 style={{display: 'inline-block',
                                 fontSize: '1em',
                                 textDecoration: 'none',

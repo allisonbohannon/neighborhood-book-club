@@ -84,7 +84,7 @@ const handleUpdateFollow = () => {
         <Card variant="outlined" sx={{m:'1em'}}>
             <CardContent >
                 <Box sx={{display:'flex', justifyContent:'space-between', padding:'1em'}}>
-                    <Typography variant="h5" ><Link to={`/users/${user.username}`} style={{color:'gray', textDecoration:'none' }}>{user.username}</Link></Typography>
+                    <Typography variant="h5" ><Link to={`/~users/${user.username}`} style={{color:'gray', textDecoration:'none' }}>{user.username}</Link></Typography>
                     <Box sx={{display:"flex", float:'right'}}>
                         <IconButton>
                             {relationship === true? <PeopleIcon /> : ''}

@@ -31,7 +31,7 @@ const ResultCard = ({result, onAddBook}) => {
                         navigate(`/books/${data.id}`)
                     })
                 } else {
-                    r.json().then(data => navigate(`/books/${data.id}`))
+                    r.json().then(data => navigate(`/~books/${data.id}`))
                 }
             })
         }

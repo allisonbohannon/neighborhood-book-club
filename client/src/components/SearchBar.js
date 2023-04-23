@@ -63,7 +63,7 @@ const SearchBar = ({setSearchActive, setSearchResults, searchTerm, setSearchTerm
                 setSearchActive(true)
                 setSearchResults(data.docs)
             })
-            navigate('/books')
+            navigate('/~books')
         }
         
     }

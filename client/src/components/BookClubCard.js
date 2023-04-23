@@ -9,7 +9,7 @@ const BookClubCard = ({club, book}) => {
 
     const {currentUser} = useContext(UserContext);
     const navigate = useNavigate(); 
-    const handleClick = () => {navigate(`/bookClubs/${club.id}`)}
+    const handleClick = () => {navigate(`/~bookClubs/${club.id}`)}
 
   return (
     <CardActionArea onClick={handleClick} sx={{display:"block"}}>

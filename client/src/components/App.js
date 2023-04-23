@@ -124,55 +124,55 @@ function App() {
               setSearchResults={setSearchResults}
             />
             <Routes>
-                <Route path="/books" element={<Books
+                <Route path="/~books" element={<Books
                   searchTerm={searchTerm}
                   searchActive={searchActive}
                   searchResults={searchResults}
                   onAddBook={onAddBook}
                 />}/> 
-                <Route path="/books/:bookId" element={<BookPage
+                <Route path="/~books/:bookId" element={<BookPage
                   books={books}
                   users={users}
                   onUpdateUser={onUpdateUser}
                   onUpdateBook={onUpdateBook}
                   onAddBookClub={onAddBookClub}
                 />}/>
-                  <Route path="/bookclubs/:bookClubId" element={<BookClubPage
+                  <Route path="/~bookclubs/:bookClubId" element={<BookClubPage
                   bookClubs={bookClubs}
                   onUpdateBookClub={onUpdateBookClub}
                   onUpdateUser={onUpdateUser}
                   onUpdateBook={onUpdateBook}
                 />}/>
-                <Route path="/bookclubs/:bookClubId/members" element={<BookClubMembersPage
+                <Route path="/~bookclubs/:bookClubId/members" element={<BookClubMembersPage
                   bookClubs={bookClubs}
                   onUpdateUser={onUpdateUser}
                 />}/>
-                <Route path="/mybooks" element={<MyBooks
+                <Route path="/~mybooks" element={<MyBooks
                   books={books}
                   users={users}
                   onUpdateUser={onUpdateUser}
                   onUpdateBook={onUpdateBook}
                 />}/>
-                 <Route path="/mybookclubs" element={<MyBookClubs
+                 <Route path="~/mybookclubs" element={<MyBookClubs
                   bookClubs={bookClubs}
                   users={users}
                   onUpdateUser={onUpdateUser}
                   onUpdateBookClub={onUpdateBookClub}
                 />}/> 
-                <Route path="/users/" element={<Users
+                <Route path="/~users/" element={<Users
                   users={users}
                   onUpdateUser={onUpdateUser}
                 />} />
-                <Route path="/users/:username" element={<UserPage
+                <Route path="/~users/:username" element={<UserPage
                   users={users}
                   onUpdateUser={onUpdateUser}
                 />} />
-                <Route path="/profile" element={<Profile
+                <Route path="/~profile" element={<Profile
                   onUpdateUser={onUpdateUser}
                 />} />
-                <Route path="/login" element={<Login
+                <Route path="/~login" element={<Login
                 />} />
-                <Route path="/signup" element={<SignUp 
+                <Route path="/~signup" element={<SignUp 
                   onAddUser={onAddUser}
                 />} />
                 <Route path="/" element={<Home

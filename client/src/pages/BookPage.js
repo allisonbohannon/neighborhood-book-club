@@ -77,7 +77,6 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
       })
       .then(r => r.json())
       .then(data => {
-        console.log(data)
         onAddBookClub(data)
          if (!userBook) {
             fetch("/reading_lists", {
@@ -94,7 +93,7 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
                   onUpdateUser(currentUser.id)
                 })
             }; 
-            navigate(`/bookclubs/${data.id}`)
+            navigate(`/~bookclubs/${data.id}`)
           });
       
   };

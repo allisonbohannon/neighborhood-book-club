@@ -93,7 +93,7 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser, onUpdateBook 
         </Box>
        
         <Box textAlign={'center'} sx={{display:'flex', width:'40%'}}>
-          <Button variant='outlined' sx={{height:'3em', padding:'3em', margin:'3em', width:'40%'}} onClick={() => {navigate(`/bookclubs/${bookClubId}/members`)}}>View Members ({displayClub.total_members})</Button>
+          <Button variant='outlined' sx={{height:'3em', padding:'3em', margin:'3em', width:'40%'}} onClick={() => {navigate(`/~bookclubs/${bookClubId}/members`)}}>View Members ({displayClub.total_members})</Button>
           <Button variant='outlined' sx={{height:'3em', padding:'3em', margin:'3em', width:'40%'}} onClick={handleUpdateMembership}>{userMemberStatus === "Active"? "Leave Club" :"Join Club"}</Button>
         </Box> 
       </Box>

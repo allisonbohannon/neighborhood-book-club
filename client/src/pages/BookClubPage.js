@@ -5,7 +5,6 @@ import { UserContext } from '../context/User';
 import { Box } from '@mui/system';
 import { Paper, Button, List, IconButton, Typography } from '@mui/material';
 import { Container } from '../styles';
-import MyBookCard from '../components/MyBookCard';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import MessageCard from '../components/MessageCard';
 
@@ -78,12 +77,19 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser, onUpdateBook 
       return <li key={message.id}><MessageCard member={member} message={message} admin={displayClub.admin} onUpdateBookClub={onUpdateBookClub} clubId={displayClub.id} /></li>
    })})
 
+   const addMessageButton = (
+    <IconButton onClick={()=> setShowInput(true)} style={{display:"inline-block", float:"right"}} >
+      <AddCommentIcon  sx={{ fontSize:'2em', color:"white" }} />
+    </IconButton>
+   )
+
   return (
     <Container >
       <Box sx={{display:"flex", justifyContent:"space-around", alignItems:'center'}}>
         <Box sx={{width:'40%'}}>
             <Typography> Book club for </Typography>
             <Typography variant="h5">{displayClub.book.title}</Typography>
+            <Typography>Active since {displayClub.started_date}</Typography>
         </Box>
        
         <Box textAlign={'center'} sx={{display:'flex', width:'40%'}}>
@@ -95,9 +101,7 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser, onUpdateBook 
       <Box>
         <Box textAlign={'center'} style={{ display:'flex', justifyContent:'space-between', backgroundColor:'gray', color:"white", alignItems:'center'}}>
             <Typography style={{padding:'1em'}} variant='h5'>Book Club Message Board - No Spoilers!</Typography>
-            <IconButton onClick={()=> setShowInput(true)} style={{display:"inline-block", float:"right"}} >
-              <AddCommentIcon  sx={{ fontSize:'2em', color:"white" }} />
-            </IconButton>
+            {userMemberStatus === "Active"? addMessageButton : ""}
         </Box>
         <Paper variant="outlined" styles={{minWidth:"80%", maxWidth:"80% "}}>
           {showInput? <NewMessage memberId={userMember.id} clubId={displayClub.id} onUpdateBookClub={onUpdateBookClub} setShowInput={setShowInput} /> : ""}

@@ -13,11 +13,11 @@ const BookClubCard = ({club, book}) => {
 
   return (
     <CardActionArea onClick={handleClick} sx={{display:"block"}}>
-      <Card sx={{margin:'1em'}}>
+      <Card sx={{margin:'1em', width:'80%'}}>
         <Typography>Local Book Club for</Typography>
         <Typography variant="h5">{book.title}</Typography>
         <Typography>Total Members: {club.total_members}</Typography>
-        <Typography>Active since: {club.created_at} </Typography>
+        <Typography>Active since: {club.started_date} </Typography>
         <Typography sx={{color:'red'}}>{club.admin === currentUser.username ? "ADMIN" : "" }</Typography>
       </Card>
     </CardActionArea>

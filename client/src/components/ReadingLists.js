@@ -8,7 +8,7 @@ const ReadingLists = ({user, onUpdateBook, onUpdateUser}) => {
      const displayList = (status) => {
         return user.reading_lists.filter(item => item.read_status === status)
          .map(item=> {
-            return <li key={item.id} style={{listStyle:"none"}}><MyBookCard book={item.book} onUpdateUser={onUpdateUser} onUpdateBook={onUpdateBook} /></li>
+            return <li key={item.id} style={{listStyle:"none"}}><MyBookCard user={user} book={item.book} onUpdateUser={onUpdateUser} onUpdateBook={onUpdateBook} /></li>
     })};
 
   return (

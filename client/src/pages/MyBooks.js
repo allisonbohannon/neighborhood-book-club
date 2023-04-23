@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import { Grid, Typography } from '@mui/material'
 import { Container } from '../styles'
 import { UserContext } from '../context/User'
 
@@ -8,8 +7,6 @@ import ReadingLists from '../components/ReadingLists'
 const MyBooks = ({onUpdateUser, onUpdateBook}) => {
 
     const { currentUser } = useContext(UserContext) 
-  
-   
 
   return (
     <Container>

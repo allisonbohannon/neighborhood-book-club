@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import NavigationBar from "./NavigationBar";
 import Home from "../pages/Home";
 import Books from "../pages/Books";
+import Users from "../pages/Users";
 import UserPage from "../pages/UserPage";
 import BookPage from "../pages/BookPage";
 import BookClubPage from "../pages/BookClubPage";
@@ -158,9 +159,12 @@ function App() {
                   onUpdateUser={onUpdateUser}
                   onUpdateBookClub={onUpdateBookClub}
                 />}/> 
+                <Route path="/users/" element={<Users
+                  users={users}
+                  onUpdateUser={onUpdateUser}
+                />} />
                 <Route path="/users/:username" element={<UserPage
                   users={users}
-                  onUpdateBook={onUpdateBook}
                   onUpdateUser={onUpdateUser}
                 />} />
                 <Route path="/profile" element={<Profile

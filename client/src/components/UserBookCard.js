@@ -1,57 +1,12 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
 import { Button, Card, CardMedia, Box, Typography } from '@mui/material';
 import { UserContext } from '../context/User';
-import StarRatingEdit from './StarRatingEdit'; 
 import StarRatingShow from './StarRatingShow';
 
-const MyBookCard = ({user, book, onUpdateUser, onUpdateBook}) => {
-
-    const { currentUser } = useContext(UserContext)
-  
- 
-    let userBook = null;
-    if (user.reading_lists.length >= 1) {
-       userBook = user.reading_lists.find(item => item.book_id === book.id)
-    };
-
-    const [readStatus, setReadStatus] = useState(userBook.read_status)
-   
-    const handleUpdateReadStatus = () => {
-        let newStatus;
-        if (readStatus === "Want to read") {
-            newStatus = "Have read";
-        } else {
-            newStatus = "Want to read";
-        };
-        fetch(`/reading_lists/${userBook.id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({read_status: newStatus}),
-            }).then(r => r.json())
-            .then(data => {
-                setReadStatus(data.read_status)
-                onUpdateUser(currentUser.id)
-            })
-                
-        };
-        
-    const handleRemoveFromList = () => {
-        fetch(`/reading_lists/${userBook.id}`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" }
-            })
-            .then(r => r.json())
-            .then(data => {
-                onUpdateUser(currentUser.id)
-                setReadStatus(null)})
-        };
-
-
+const UserBookCard = ({book}) => {
   return (
-        <Card variant='outlined' sx={{display:"inline-flex", margin:"10px", padding:'.5em',minWidth:"100%", maxWidth:"100%", height:'25em', margin:'1px'}}>
+    <Card variant='outlined' sx={{display:"inline-flex", margin:"10px", padding:'.5em',minWidth:"100%", maxWidth:"100%", height:'25em', margin:'1px'}}>
              <Box sx={{display:'block', alignSelf:'center', margin:'1em', minWidth:'40%', maxWidth:'40%', padding:'1em'}}>
                 <CardMedia component="img"
                         image={book.cover_url} 
@@ -112,4 +67,4 @@ const MyBookCard = ({user, book, onUpdateUser, onUpdateBook}) => {
   )
 }
 
-export default MyBookCard
+export default UserBookCard

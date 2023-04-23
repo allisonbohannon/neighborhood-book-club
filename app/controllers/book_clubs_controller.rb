@@ -19,8 +19,8 @@ class BookClubsController < ApplicationController
     @user = User.find_by(id: session[:user_id])
 
     if @book_club.save
-      BookClubMember.create(book_club_id: @book_club.id, user_id: @user.id)
-      render json: @book_club, status: :created, location: @book_club
+      BookClubMember.create(book_club_id: @book_club.id, user_id: @user.id, status: "Active")
+      render json: @book_club, status: :created, include: ['book', 'book_club_members', 'book_club_members.user', 'book_club_members.messages']
     else
       render json: @book_club.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class BookClubsController < ApplicationController
   # PATCH/PUT /book_clubs/1
   def update
     if @book_club.update(book_club_params)
-      render json: @book_club
+      render json: @book_club, nclude: ['book', 'book_club_members', 'book_club_members.user', 'book_club_members.messages']
     else
       render json: @book_club.errors, status: :unprocessable_entity
     end

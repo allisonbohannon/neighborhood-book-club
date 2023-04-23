@@ -16,4 +16,10 @@ class SessionsController < ApplicationController
         head :no_content 
     end
 
+    private 
+
+    def user_params
+        params.permit(:id, :username, :first_name, :last_name, :email, :password, :password_confirmation, :bio, :zipcode, users_attributes: [:id, :username, :first_name, :last_name, :email, :password, :password_confirmation, :bio, :zipcode])
+      end
+
 end

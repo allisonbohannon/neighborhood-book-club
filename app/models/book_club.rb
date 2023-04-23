@@ -9,4 +9,8 @@ class BookClub < ApplicationRecord
     self.book_club_members.count
   end
 
+  def started_date 
+    self.created_at.strftime("%m-%d-%Y")
+  end
+
 end

@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     user = User.create!(user_params)
     if user.valid?
       session[:user_id] = user.id
+      UserMailer.with(user: @user).welcome_email
       render json: user, status: :created
     end
   end
@@ -83,7 +84,7 @@ private
   end
 
   def render_not_found_response
-    render json: { error: "Camper not found" }, status: :not_found
+    render json: { error: "User not found" }, status: :not_found
   end
 
   def render_unprocessable_entity_response(exception)

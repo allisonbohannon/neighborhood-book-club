@@ -8,6 +8,7 @@ import ReadingLists from '../components/ReadingLists'
 const UserPage = ({users, onUpdateUser, onUpdateBook}) => {
 
   const { username } = useParams(); 
+  console.log(users)
 
   const displayUser = users.find(user => username === user.username)
   console.log(displayUser)

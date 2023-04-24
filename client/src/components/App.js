@@ -54,6 +54,8 @@ function App() {
 
   }, []);
 
+  console.log(users)
+
   const onAddBook = (newBook) => {
       setBooks([...books, newBook])
   };

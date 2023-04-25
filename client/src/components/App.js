@@ -153,7 +153,7 @@ function App() {
                   onUpdateUser={onUpdateUser}
                   onUpdateBook={onUpdateBook}
                 />}/>
-                 <Route path="~/mybookclubs" element={<MyBookClubs
+                 <Route path="/~mybookclubs" element={<MyBookClubs
                   bookClubs={bookClubs}
                   users={users}
                   onUpdateUser={onUpdateUser}

@@ -60,7 +60,7 @@ const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser, onUpdateBook 
         },
         body: JSON.stringify({
           user_id: currentUser.id,
-          book_club: displayClub.id,
+          book_club_id: displayClub.id,
           status: "Active"
         }),
       }).then(r => r.json())

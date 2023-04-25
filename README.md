@@ -45,3 +45,5 @@ You can use the following commands to run the application:
 https://neighborhood-book-club.onrender.com
 
 ### Video walkthru: 
+
+https://youtu.be/sS7NPMvSwSw

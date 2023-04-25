@@ -77,7 +77,7 @@ const LoginForm = () => {
           <Button sx={{display:'block'}}>
             <Link sx={{color:'black'}}
                     style={{textDecoration:"none", color:"black"}}
-                    to='/~signup'> 
+                    to='/signup'> 
                     Not a Member? Sign up now!
               </Link>
           </Button>

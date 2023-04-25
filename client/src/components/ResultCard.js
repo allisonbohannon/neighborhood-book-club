@@ -28,7 +28,7 @@ const ResultCard = ({result, onAddBook}) => {
                 } else if (r.status === 201) {
                     r.json().then(data => {
                         onAddBook(data)
-                        navigate(`/books/${data.id}`)
+                        navigate(`/~books/${data.id}`)
                     })
                 } else {
                     r.json().then(data => navigate(`/~books/${data.id}`))

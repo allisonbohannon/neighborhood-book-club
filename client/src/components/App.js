@@ -54,8 +54,6 @@ function App() {
 
   }, []);
 
-  console.log(users)
-
   const onAddBook = (newBook) => {
       setBooks([...books, newBook])
   };
@@ -174,7 +172,7 @@ function App() {
                 />} />
                 <Route path="/~login" element={<Login
                 />} />
-                <Route path="/~signup" element={<SignUp 
+                <Route path="/signup" element={<SignUp 
                   onAddUser={onAddUser}
                 />} />
                 <Route path="/" element={<Home

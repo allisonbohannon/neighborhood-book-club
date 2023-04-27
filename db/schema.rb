@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_20_234936) do
+ActiveRecord::Schema.define(version: 2023_04_27_204929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,17 @@ ActiveRecord::Schema.define(version: 2023_04_20_234936) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "follower_count"
     t.integer "following_count"
+  end
+
+  create_table "zipcodes", force: :cascade do |t|
+    t.string "zip"
+    t.string "primarycity"
+    t.string "state"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "book_club_members", "book_clubs"

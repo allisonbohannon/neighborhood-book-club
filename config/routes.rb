@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :zipcodes
   resources :relationships, only: [:index, :show, :create, :destroy]
   resources :messages, only: [:index, :show, :create, :destroy, :update]
   resources :book_club_members,  only: [:index, :show, :create, :update]

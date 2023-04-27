@@ -6,7 +6,7 @@ class BookClub < ApplicationRecord
   has_many :messages, through: :book_club_members
 
   def total_members
-    self.book_club_members.count
+    self.book_club_members.where(:status => "Active").count
   end
 
   def started_date 

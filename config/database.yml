@@ -81,4 +81,4 @@ test:
 #
 production:
   <<: *default
-  url: https://neighborhood-book-club.onrender.com
+  url: <%= ENV['DATABASE_URL'] %>

@@ -1,3 +1,4 @@
+require "logger"
 require_relative "boot"
 
 require "rails"
@@ -12,7 +13,7 @@ require "action_mailbox/engine"
 require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
-require "logger"
+
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 

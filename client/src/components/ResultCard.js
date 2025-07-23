@@ -14,7 +14,7 @@ const ResultCard = ({result, onAddBook}) => {
             subject: subject,
             pages: result.number_of_pages_median,
             cover_url: url,
-            isbn: isbn
+            isbn: result.cover_i
         }
         //On the backend, user find_or_create_by isbn to add to DB
         fetch("/books", {
@@ -38,10 +38,10 @@ const ResultCard = ({result, onAddBook}) => {
           
 
     let isbn; 
-    if (result.isbn.length > 0 ) {
-        isbn = result.isbn[0]
+    if (result.cover_i.length > 0 ) {
+        isbn = result.cover_i[0]
     } else {
-        isbn = result.isbn
+        isbn = result.cover_i
     }
 
     let author = ''; 

@@ -7,11 +7,13 @@ import { Container} from '../styles';
 const Books = ({onAddBook, searchActive, searchResults}) => {
 
     let displayResults; 
-    if (searchActive === true && searchResults.length == 0) {
+    if (searchActive === true && searchResults.length === 0) {
         displayResults = "Hmm... no matches found"
     } else {
-        displayResults = searchResults.filter(result => result.isbn )
+      console.log(searchResults);
+        displayResults = searchResults.filter(result => result.cover_i)
             .map(result => {
+      
                 return <li key={result.key} style={{listStyle:'none'}}><ResultCard result={result} onAddBook={onAddBook}/></li>
             })
     }

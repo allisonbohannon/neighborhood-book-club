@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, TextField } from '@mui/material';
+import { Button, FormControl, TextField } from '@mui/material';
 
 const NewMessage = ({memberId, clubId, onUpdateBookClub, setShowInput}) => {
 

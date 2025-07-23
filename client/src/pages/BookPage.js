@@ -26,7 +26,7 @@ const BookPage = ({books, onAddBookClub, onUpdateUser, onUpdateBook}) => {
   let localBookClub = null; 
   if (displayBook.book_clubs.length>=1) {
     localBookClub = displayBook.book_clubs.filter(club => club.status === "Active")
-      .find(club => club.zip_three == currentUser.zipcode.slice(0, 3))
+      .find(club => club.zip_three === currentUser.zipcode.slice(0, 3))
   };
   
   const handleUpdateReadingList = (e) => {

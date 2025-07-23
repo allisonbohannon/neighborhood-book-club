@@ -8,7 +8,7 @@ import { Container } from '../styles';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import MessageCard from '../components/MessageCard';
 
-const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser, onUpdateBook }) => {
+const BookClubPage = ({ bookClubs, onUpdateBookClub, onUpdateUser }) => {
 
   const { bookClubId } = useParams();
   const { currentUser } = useContext(UserContext); 

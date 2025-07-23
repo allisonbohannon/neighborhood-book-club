@@ -6,8 +6,6 @@ import SearchBar from './SearchBar';
 import { AppBar,Toolbar, CssBaseline, Typography, makeStyles, Box, IconButton, Menu, MenuItem} from "@material-ui/core";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-import pic from '../images/logo.png';
-
 const useStyles = makeStyles((theme) => ({
     navlinks: {
       display: "inline-flex",

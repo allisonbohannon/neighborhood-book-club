@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_27_204929) do
+ActiveRecord::Schema.define(version: 2023_10_24_033153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2023_04_27_204929) do
 
   create_table "messages", force: :cascade do |t|
     t.bigint "book_club_member_id", null: false
-    t.string "message"
+    t.string "message_content"
     t.integer "posted_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -92,6 +92,24 @@ ActiveRecord::Schema.define(version: 2023_04_27_204929) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "follower_count"
     t.integer "following_count"
+  end
+
+  create_table "wineries", force: :cascade do |t|
+    t.string "name"
+    t.string "about"
+    t.string "tastingcost"
+    t.string "rezrequired"
+    t.string "imagesrc"
+    t.string "address1"
+    t.string "address2"
+    t.string "city"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "region"
+    t.string "website"
+    t.integer "avg_ratings"
+    t.integer "total_ratings"
+    t.string "rez_link"
   end
 
   create_table "zipcodes", force: :cascade do |t|

@@ -49,7 +49,7 @@ end
 500.times do 
     Message.create(
         book_club_member_id: rand(1..500),
-        message: Faker::Movie.quote,
+        message_content: Faker::Movie.quote,
         posted_date: Faker::Date.between(from: '2023-04-16', to: '2020-09-25')
     )
 end

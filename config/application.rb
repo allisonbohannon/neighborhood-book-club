@@ -19,7 +19,7 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module ReactRailsApiProjectTemplate
+module NeighborhoodBookClub
   class Application < Rails::Application
     # Adding cookies and session middleware
     config.middleware.use ActionDispatch::Cookies

@@ -12,8 +12,8 @@ const BookClubCard = ({club, book}) => {
     const handleClick = () => {navigate(`/~bookClubs/${club.id}`)}
 
   return (
-    <CardActionArea onClick={handleClick} sx={{display:"block"}}>
-      <Card sx={{margin:'1em', width:'80%'}}>
+    <CardActionArea onClick={handleClick} sx={{display:"inline"}}>
+      <Card sx={{margin:'1em', width:'33%'}}>
         <Typography>Local Book Club for</Typography>
         <Typography variant="h5">{book.title}</Typography>
         <Typography>Total Members: {club.total_members}</Typography>
